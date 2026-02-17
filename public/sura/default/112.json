@@ -1,0 +1,341 @@
+{
+    "aya": [{
+        "a_id": 6222,
+        "verse_key": "112:1",
+        "text": "قُلْ هُوَ ٱللَّهُ أَحَدٌ",
+        "sajdah": null,
+        "juz": 30,
+        "page": 604,
+        "words": [{
+            "id": "88174",
+            "wId": 77372,
+            "verse_key": "112:1",
+            "char_type": "word",
+            "code": "&#xfb51;",
+            "page": "604",
+            "audio": "/112_001_001.mp3",
+            "text": "قُلْ",
+            "translation": {
+                "en": "Say",
+                "bn": "বলো",
+                "trl": "qul"
+            }
+        }, {
+            "id": "88175",
+            "wId": 77373,
+            "verse_key": "112:1",
+            "char_type": "word",
+            "code": "&#xfb52;",
+            "page": "604",
+            "audio": "/112_001_002.mp3",
+            "text": "هُوَ",
+            "translation": {
+                "en": "He",
+                "bn": "\"তিনি",
+                "trl": "huwa"
+            }
+        }, {
+            "id": "88176",
+            "wId": 77374,
+            "verse_key": "112:1",
+            "char_type": "word",
+            "code": "&#xfb53;",
+            "page": "604",
+            "audio": "/112_001_003.mp3",
+            "text": "اللَّهُ",
+            "translation": {
+                "en": "(is) Allah",
+                "bn": "আল্লাহ",
+                "trl": "l-lahu"
+            }
+        }, {
+            "id": "88177",
+            "wId": 77375,
+            "verse_key": "112:1",
+            "char_type": "word",
+            "code": "&#xfb54;",
+            "page": "604",
+            "audio": "/112_001_004.mp3",
+            "text": "أَحَدٌ",
+            "translation": {
+                "en": "the One",
+                "bn": "এক-অদ্বিতীয়",
+                "trl": "aḥadun"
+            }
+        }, {
+            "id": "88178",
+            "code": "&#xfb55;",
+            "code_v3": "&#xa001;",
+            "verse_key": "112:1",
+            "char_type": "end"
+        }],
+        "translation": {
+            "bn": "বলঃ তিনিই আল্লাহ, একক/অদ্বিতীয়।",
+            "en": "Say, \"He is Allah, [who is] One,",
+            "trl": "Qul huwa Allahu ahad"
+        },
+        "tajweed": {
+            "annotations": [{
+                "end": 11,
+                "rule": "hamzat_wasl",
+                "start": 10
+            }, {
+                "end": 23,
+                "rule": "qalqalah",
+                "start": 22
+            }]
+        }
+    }, {
+        "a_id": 6223,
+        "verse_key": "112:2",
+        "text": "ٱللَّهُ ٱلصَّمَدُ",
+        "sajdah": null,
+        "juz": 30,
+        "page": 604,
+        "words": [{
+            "id": "88179",
+            "wId": 77376,
+            "verse_key": "112:2",
+            "char_type": "word",
+            "code": "&#xfb56;",
+            "page": "604",
+            "audio": "/112_002_001.mp3",
+            "text": "اللَّهُ",
+            "translation": {
+                "en": "Allah",
+                "bn": "আল্লাহ",
+                "trl": "al-lahu"
+            }
+        }, {
+            "id": "88180",
+            "wId": 77377,
+            "verse_key": "112:2",
+            "char_type": "word",
+            "code": "&#xfb57;",
+            "page": "604",
+            "audio": "/112_002_002.mp3",
+            "text": "الصَّمَدُ",
+            "translation": {
+                "en": "the Eternal the Absolute",
+                "bn": "অমুখাপেক্ষী",
+                "trl": "l-ṣamadu"
+            }
+        }, {
+            "id": "88181",
+            "code": "&#xfb58;",
+            "code_v3": "&#xa002;",
+            "verse_key": "112:2",
+            "char_type": "end"
+        }],
+        "translation": {
+            "bn": "আল্লাহ কারও মুখাপেক্ষী নন।",
+            "en": "Allah, the Eternal Refuge.",
+            "trl": "Allahu assamad"
+        },
+        "tajweed": {
+            "annotations": [{
+                "end": 9,
+                "rule": "hamzat_wasl",
+                "start": 8
+            }, {
+                "end": 10,
+                "rule": "lam_shamsiyyah",
+                "start": 9
+            }, {
+                "end": 16,
+                "rule": "qalqalah",
+                "start": 15
+            }]
+        }
+    }, {
+        "a_id": 6224,
+        "verse_key": "112:3",
+        "text": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+        "sajdah": null,
+        "juz": 30,
+        "page": 604,
+        "words": [{
+            "id": "88182",
+            "wId": 77378,
+            "verse_key": "112:3",
+            "char_type": "word",
+            "code": "&#xfb59;",
+            "page": "604",
+            "audio": "/112_003_001.mp3",
+            "text": "لَمْ",
+            "translation": {
+                "en": "Not",
+                "bn": "নি",
+                "trl": "lam"
+            }
+        }, {
+            "id": "88183",
+            "wId": 77379,
+            "verse_key": "112:3",
+            "char_type": "word",
+            "code": "&#xfb5a;",
+            "page": "604",
+            "audio": "/112_003_002.mp3",
+            "text": "يَلِدْ",
+            "translation": {
+                "en": "He begets",
+                "bn": "তিনি (কাউকে) জন্ম দেন",
+                "trl": "yalid"
+            }
+        }, {
+            "id": "88184",
+            "wId": 77380,
+            "verse_key": "112:3",
+            "char_type": "word",
+            "code": "&#xfb5b;",
+            "page": "604",
+            "audio": "/112_003_003.mp3",
+            "text": "وَلَمْ",
+            "translation": {
+                "en": "and not",
+                "bn": "এবং নি",
+                "trl": "walam"
+            }
+        }, {
+            "id": "88185",
+            "wId": 77381,
+            "verse_key": "112:3",
+            "char_type": "word",
+            "code": "&#xfb5c;",
+            "page": "604",
+            "audio": "/112_003_004.mp3",
+            "text": "يُولَدْ",
+            "translation": {
+                "en": "He is begotten",
+                "bn": "তাঁকে জন্ম দেয়া হয়",
+                "trl": "yūlad"
+            }
+        }, {
+            "id": "88186",
+            "code": "&#xfb5d;",
+            "code_v3": "&#xa003;",
+            "verse_key": "112:3",
+            "char_type": "end"
+        }],
+        "translation": {
+            "bn": "তাঁর কোন সন্তান নেই এবং তিনিও কারও সন্তান নন,",
+            "en": "He neither begets nor is born,",
+            "trl": "Lam yalid walam yoolad"
+        },
+        "tajweed": {
+            "annotations": [{
+                "end": 11,
+                "rule": "qalqalah",
+                "start": 9
+            }, {
+                "end": 25,
+                "rule": "qalqalah",
+                "start": 24
+            }]
+        }
+    }, {
+        "a_id": 6225,
+        "verse_key": "112:4",
+        "text": "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
+        "sajdah": null,
+        "juz": 30,
+        "page": 604,
+        "words": [{
+            "id": "88187",
+            "wId": 77382,
+            "verse_key": "112:4",
+            "char_type": "word",
+            "code": "&#xfb5e;",
+            "page": "604",
+            "audio": "/112_004_001.mp3",
+            "text": "وَلَمْ",
+            "translation": {
+                "en": "And not",
+                "bn": "এবং নাই",
+                "trl": "walam"
+            }
+        }, {
+            "id": "88188",
+            "wId": 77383,
+            "verse_key": "112:4",
+            "char_type": "word",
+            "code": "&#xfb5f;",
+            "page": "604",
+            "audio": "/112_004_002.mp3",
+            "text": "يَكُنْ",
+            "translation": {
+                "en": "is",
+                "bn": "(হয়)",
+                "trl": "yakun"
+            }
+        }, {
+            "id": "88189",
+            "wId": 77384,
+            "verse_key": "112:4",
+            "char_type": "word",
+            "code": "&#xfb60;",
+            "page": "604",
+            "audio": "/112_004_003.mp3",
+            "text": "لَهُ",
+            "translation": {
+                "en": "for Him",
+                "bn": "তাঁর",
+                "trl": "lahu"
+            }
+        }, {
+            "id": "88190",
+            "wId": 77385,
+            "verse_key": "112:4",
+            "char_type": "word",
+            "code": "&#xfb61;",
+            "page": "604",
+            "audio": "/112_004_004.mp3",
+            "text": "كُفُوًا",
+            "translation": {
+                "en": "equivalent",
+                "bn": "সমতুল্য/ সমান",
+                "trl": "kufuwan"
+            }
+        }, {
+            "id": "88191",
+            "wId": 77386,
+            "verse_key": "112:4",
+            "char_type": "word",
+            "code": "&#xfb62;",
+            "page": "604",
+            "audio": "/112_004_005.mp3",
+            "text": "أَحَدٌ",
+            "translation": {
+                "en": "any [one]",
+                "bn": "কেউই\"",
+                "trl": "aḥadun"
+            }
+        }, {
+            "id": "88192",
+            "code": "&#xfb63;",
+            "code_v3": "&#xa004;",
+            "verse_key": "112:4",
+            "char_type": "end"
+        }],
+        "translation": {
+            "bn": "এবং তাঁর সমতুল্য কেহই নেই।",
+            "en": "Nor is there to Him any equivalent.\"",
+            "trl": "Walam yakun lahu kufuwan ahad"
+        },
+        "tajweed": {
+            "annotations": [{
+                "end": 16,
+                "rule": "idghaam_no_ghunnah",
+                "start": 11
+            }, {
+                "end": 19,
+                "rule": "madd_2",
+                "start": 18
+            }, {
+                "end": 33,
+                "rule": "qalqalah",
+                "start": 32
+            }]
+        }
+    }]
+}

@@ -1,0 +1,375 @@
+@font-face {
+  font-family: "read-alquran";
+  src: url("fonts/read-alquran.eot?4x7luy");
+  src: url("fonts/read-alquran.eot?4x7luy#iefix") format("embedded-opentype"),
+    url("fonts/read-alquran.ttf?4x7luy") format("truetype"),
+    url("fonts/read-alquran.woff?4x7luy") format("woff"),
+    url("fonts/read-alquran.svg?4x7luy#read-alquran") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.raq {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "read-alquran" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.raq-bismallah:before {
+  content: "\fdfd";
+}
+.raq-surah59:before {
+  content: "\e900";
+}
+.raq-surah60:before {
+  content: "\e901";
+}
+.raq-surah48:before {
+  content: "\e902";
+}
+.raq-surah:before {
+  content: "\e903";
+}
+.raq-surah1:before {
+  content: "\e904";
+}
+.raq-surah2:before {
+  content: "\e905";
+}
+.raq-surah3:before {
+  content: "\e906";
+}
+.raq-surah4:before {
+  content: "\e907";
+}
+.raq-surah5:before {
+  content: "\e908";
+}
+.raq-surah38:before {
+  content: "\e909";
+}
+.raq-surah39:before {
+  content: "\e90a";
+}
+.raq-surah6:before {
+  content: "\e90b";
+}
+.raq-surah7:before {
+  content: "\e90c";
+}
+.raq-surah8:before {
+  content: "\e90d";
+}
+.raq-surah9:before {
+  content: "\e90e";
+}
+.raq-surah10:before {
+  content: "\e90f";
+}
+.raq-surah11:before {
+  content: "\e910";
+}
+.raq-surah12:before {
+  content: "\e911";
+}
+.raq-surah13:before {
+  content: "\e912";
+}
+.raq-surah14:before {
+  content: "\e913";
+}
+.raq-surah15:before {
+  content: "\e914";
+}
+.raq-surah16:before {
+  content: "\e915";
+}
+.raq-surah17:before {
+  content: "\e916";
+}
+.raq-surah18:before {
+  content: "\e917";
+}
+.raq-surah19:before {
+  content: "\e918";
+}
+.raq-surah20:before {
+  content: "\e919";
+}
+.raq-surah21:before {
+  content: "\e91a";
+}
+.raq-surah22:before {
+  content: "\e91b";
+}
+.raq-surah23:before {
+  content: "\e91c";
+}
+.raq-surah24:before {
+  content: "\e91d";
+}
+.raq-surah25:before {
+  content: "\e91e";
+}
+.raq-surah26:before {
+  content: "\e91f";
+}
+.raq-surah27:before {
+  content: "\e920";
+}
+.raq-surah28:before {
+  content: "\e921";
+}
+.raq-surah29:before {
+  content: "\e922";
+}
+.raq-surah30:before {
+  content: "\e923";
+}
+.raq-surah31:before {
+  content: "\e924";
+}
+.raq-surah32:before {
+  content: "\e925";
+}
+.raq-surah33:before {
+  content: "\e926";
+}
+.raq-surah40:before {
+  content: "\e927";
+}
+.raq-surah41:before {
+  content: "\e928";
+}
+.raq-surah42:before {
+  content: "\e929";
+}
+.raq-surah43:before {
+  content: "\e92a";
+}
+.raq-surah44:before {
+  content: "\e92b";
+}
+.raq-surah45:before {
+  content: "\e92c";
+}
+.raq-surah46:before {
+  content: "\e92d";
+}
+.raq-surah34:before {
+  content: "\e92e";
+}
+.raq-surah35:before {
+  content: "\e92f";
+}
+.raq-surah36:before {
+  content: "\e930";
+}
+.raq-surah37:before {
+  content: "\e931";
+}
+.raq-surah47:before {
+  content: "\e932";
+}
+.raq-surah49:before {
+  content: "\e933";
+}
+.raq-surah50:before {
+  content: "\e934";
+}
+.raq-surah51:before {
+  content: "\e935";
+}
+.raq-surah52:before {
+  content: "\e936";
+}
+.raq-surah53:before {
+  content: "\e937";
+}
+.raq-surah54:before {
+  content: "\e938";
+}
+.raq-surah55:before {
+  content: "\e939";
+}
+.raq-surah56:before {
+  content: "\e93a";
+}
+.raq-surah57:before {
+  content: "\e93b";
+}
+.raq-surah58:before {
+  content: "\e93c";
+}
+.raq-surah79:before {
+  content: "\e93d";
+}
+.raq-surah80:before {
+  content: "\e93e";
+}
+.raq-surah81:before {
+  content: "\e93f";
+}
+.raq-surah82:before {
+  content: "\e940";
+}
+.raq-surah61:before {
+  content: "\e941";
+}
+.raq-surah62:before {
+  content: "\e942";
+}
+.raq-surah63:before {
+  content: "\e943";
+}
+.raq-surah64:before {
+  content: "\e944";
+}
+.raq-surah65:before {
+  content: "\e945";
+}
+.raq-surah66:before {
+  content: "\e946";
+}
+.raq-surah67:before {
+  content: "\e947";
+}
+.raq-surah68:before {
+  content: "\e948";
+}
+.raq-surah69:before {
+  content: "\e949";
+}
+.raq-surah70:before {
+  content: "\e94a";
+}
+.raq-surah71:before {
+  content: "\e94b";
+}
+.raq-surah72:before {
+  content: "\e94c";
+}
+.raq-surah73:before {
+  content: "\e94d";
+}
+.raq-surah74:before {
+  content: "\e94e";
+}
+.raq-surah75:before {
+  content: "\e94f";
+}
+.raq-surah76:before {
+  content: "\e950";
+}
+.raq-surah77:before {
+  content: "\e951";
+}
+.raq-surah78:before {
+  content: "\e952";
+}
+.raq-surah83:before {
+  content: "\e953";
+}
+.raq-surah84:before {
+  content: "\e954";
+}
+.raq-surah85:before {
+  content: "\e955";
+}
+.raq-surah86:before {
+  content: "\e956";
+}
+.raq-surah87:before {
+  content: "\e957";
+}
+.raq-surah88:before {
+  content: "\e958";
+}
+.raq-surah89:before {
+  content: "\e959";
+}
+.raq-surah90:before {
+  content: "\e95a";
+}
+.raq-surah91:before {
+  content: "\e95b";
+}
+.raq-surah92:before {
+  content: "\e95c";
+}
+.raq-surah93:before {
+  content: "\e95d";
+}
+.raq-surah94:before {
+  content: "\e95e";
+}
+.raq-surah95:before {
+  content: "\e95f";
+}
+.raq-surah96:before {
+  content: "\e960";
+}
+.raq-surah97:before {
+  content: "\e961";
+}
+.raq-surah98:before {
+  content: "\e962";
+}
+.raq-surah99:before {
+  content: "\e963";
+}
+.raq-surah100:before {
+  content: "\e964";
+}
+.raq-surah101:before {
+  content: "\e965";
+}
+.raq-surah102:before {
+  content: "\e966";
+}
+.raq-surah103:before {
+  content: "\e967";
+}
+.raq-surah104:before {
+  content: "\e968";
+}
+.raq-surah105:before {
+  content: "\e969";
+}
+.raq-surah106:before {
+  content: "\e96a";
+}
+.raq-surah107:before {
+  content: "\e96b";
+}
+.raq-surah108:before {
+  content: "\e96c";
+}
+.raq-surah109:before {
+  content: "\e96d";
+}
+.raq-surah110:before {
+  content: "\e96e";
+}
+.raq-surah111:before {
+  content: "\e96f";
+}
+.raq-surah112:before {
+  content: "\e970";
+}
+.raq-surah113:before {
+  content: "\e971";
+}
+.raq-surah114:before {
+  content: "\e972";
+}

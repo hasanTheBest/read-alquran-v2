@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'QCF_P567';
+  src: local('QCF_P567'),
+       url('page/QCF_P567.woff') format('woff'),
+       url(https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/mushaf-woff2/QCF_P567.woff2) format('woff2'),
+       url(https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/mushaf-woff/QCF_P567.woff) format('woff');
+}

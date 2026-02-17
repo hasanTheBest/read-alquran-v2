@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "KFGQPC Uthman Taha Naskh";
+  src: local("KFGQPC Uthman Taha Naskh"),
+    url("KFGQPC-Uthman-Taha-Naskh.woff2") format("woff2"),
+    url("KFGQPC-Uthman-Taha-Naskh.woff") format("woff");
+}
+
+@font-face {
+  font-family: "me_quran";
+  src: local("me_quran"), url("me_quran.woff2") format("woff2"),
+    url("me_quran.woff") format("woff");
+}
+@font-face {
+  font-family: "Noore Hidayat";
+  src: local("Noore Hidayat"), url("Noore-Hidayat.woff2") format("woff2"),
+    url("Noore-Hidayat.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Nafees Nastaleeq";
+  font-weight: 400;
+  src: local("Nafees Nastaleeq"), url("Nafees-Nastaleeq.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Uthmanic Hafs";
+  src: local("Uthmanic Hafs"), url("Uthmanic-Hafs.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Uthmanic TN";
+  src: local("Uthmanic TN"), url("Uthmanic-TN.woff2") format("woff2");
+}
