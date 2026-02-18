@@ -2,9 +2,9 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 // import WebfontLoader from "@dr-kobros/react-webfont-loader";
-
 import theme from "./theme";
 import SettingProvider from "./Context/SettingsContext";
+import "./App.css"
 
 const Home = lazy(() => import("./Containers/Home"));
 const Sura = lazy(() => import("./Containers/Sura"));

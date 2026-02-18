@@ -35,7 +35,7 @@ const Sura = () => {
   const { suraId } = useParams();
 
   return (
-    <div className="sura-container">
+    
       <Suspense fallback={<Loading />}>
         <SuraContextProvider>
           <Header />
@@ -44,7 +44,7 @@ const Sura = () => {
           <Footer />
         </SuraContextProvider>
       </Suspense>
-    </div>
+    
   );
 };
 
