@@ -219,6 +219,8 @@ const QuranQarim = () => {
   return (
     <Box
       component="svg"
+      version="1.0"
+      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 600 230"
       preserveAspectRatio="xMidYMid meet"
       sx={{
@@ -232,15 +234,15 @@ const QuranQarim = () => {
         },
       }}
     >
-      <svg
-      version="1.0"
-      xmlns="http://www.w3.org/2000/svg"
+      {/* <svg
+      // version="1.0"
+      // xmlns="http://www.w3.org/2000/svg"
       width="600.000000pt"
-      height="230.000000pt"
+      height="100%"
       viewBox="0 0 600.000000 230.000000"
       preserveAspectRatio="xMidYMid meet"
       // className={quranSvg}
-    >
+    > */}
       <g
         // className={classes.quranText}
         transform="translate(0.000000,230.000000) scale(0.100000,-0.100000)"
@@ -413,7 +415,7 @@ m2452 -1289 c48 -14 78 -52 78 -100 0 -46 -22 -68 -110 -109 -74 -35 -73 -36
 65 17 91 -24 31 -113 98 -130 98 -9 0 -30 -16 -46 -36z"
         />
       </g>
-    </svg>
+    {/* </svg> */}
     </Box>
   );
 };

@@ -115,7 +115,13 @@ const SuraMeta = ({ suraList }) => {
   return (
     <>
       {suraList.map(({ index, tname, name, ayas, ename }) => (
-        <Grid item xs={12} sm={6} md={4} key={`${index}-${tname}`}>
+        <Grid
+          size={{
+            xs: 12,
+            sm: 6,
+            md: 4,
+          }}
+          key={`${index}-${tname}`}>
           <Link
             component={RouterLink}
             to={`sura/${index}`}

@@ -1,10 +1,14 @@
+#root{
+  width: 100%;
+}
+
 @font-face {
   font-family: "read-alquran";
-  src: url("../public/fonts/sura_names/fonts/read-alquran.eot");
-  src: url("../public/fonts/sura_names/fonts/read-alquran.eot") format("embedded-opentype"),
-    url("../public/fonts/sura_names/fonts/read-alquran.ttf") format("truetype"),
-    url("../public/fonts/sura_names/fonts/read-alquran.woff") format("woff"),
-    url("../public/fonts/sura_names/fonts/read-alquran.svg") format("svg");
+  src: url("/fonts/sura_names/fonts/read-alquran.eot");
+  src: url("/fonts/sura_names/fonts/read-alquran.eot") format("embedded-opentype"),
+    url("/fonts/sura_names/fonts/read-alquran.ttf") format("truetype"),
+    url("/fonts/sura_names/fonts/read-alquran.woff") format("woff"),
+    url("/fonts/sura_names/fonts/read-alquran.svg") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;

@@ -171,6 +171,34 @@ const metaItem = [
   "Sajda",
 ];
 
+const metaIndexArray = [
+  <SuraMeta suraList={suraList.suras.sura} />,
+  <MetaIndex
+    metaInfo={pageMeta.pages.page}
+    metaItem="Page"
+  />,
+  <MetaIndex
+    metaInfo={juzMeta.juzs.juz}
+    metaItem="Juz"
+  />,
+  <MetaIndex
+    metaInfo={rukusMeta.rukus.ruku}
+    metaItem="Ruku"
+  />,
+  <MetaIndex
+    metaInfo={hizbMeta.hizbs.quarter}
+    metaItem="Hizb"
+  />,
+  <MetaIndex
+    metaInfo={manzilsMeta.manzils.manzil}
+    metaItem="Manzil"
+  />,
+  <MetaIndex
+    metaInfo={sajdasMeta.sajdas.sajda}
+    metaItem="Sajda"
+  />
+]
+
 const IndexTabs = () => {
   const theme = useTheme();
   const [tabValue, setTabValue] = useState(0);
@@ -218,52 +246,8 @@ const IndexTabs = () => {
           index={i}
           dir={theme.direction}
         >
-          <Grid container spacing={5} justifyContent="center">
-            {i === 0 && (
-              <SuraMeta suraList={suraList.suras.sura} />
-            )}
-
-            {i === 1 && (
-              <MetaIndex
-                metaInfo={pageMeta.pages.page}
-                metaItem="Page"
-              />
-            )}
-
-            {i === 2 && (
-              <MetaIndex
-                metaInfo={juzMeta.juzs.juz}
-                metaItem="Juz"
-              />
-            )}
-
-            {i === 3 && (
-              <MetaIndex
-                metaInfo={rukusMeta.rukus.ruku}
-                metaItem="Ruku"
-              />
-            )}
-
-            {i === 4 && (
-              <MetaIndex
-                metaInfo={hizbMeta.hizbs.quarter}
-                metaItem="Hizb"
-              />
-            )}
-
-            {i === 5 && (
-              <MetaIndex
-                metaInfo={manzilsMeta.manzils.manzil}
-                metaItem="Manzil"
-              />
-            )}
-
-            {i === 6 && (
-              <MetaIndex
-                metaInfo={sajdasMeta.sajdas.sajda}
-                metaItem="Sajda"
-              />
-            )}
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            {metaIndexArray[i]}
           </Grid>
         </TabPanel>
       ))}

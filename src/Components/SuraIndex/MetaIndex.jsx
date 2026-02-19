@@ -153,10 +153,11 @@ const MetaIndex = ({ metaInfo, metaItem }) => {
     <>
       {metaInfo.map(({ index, name, tname, ename, sura, aya, text }, i) => (
         <Grid
-          item
-          xs={12}
-          sm={6}
-          md={4}
+          size={{
+            xs: 12,
+            sm: 6,
+            md: 4,
+          }}
           key={`${index}_sura_${sura}_aya${aya}`}
         >
           <Link
@@ -185,10 +186,10 @@ const MetaIndex = ({ metaInfo, metaItem }) => {
                       String(parseFloat(index / 4)).split(".")[1] === "25"
                         ? ""
                         : String(parseFloat(index / 4)).split(".")[1] === "5"
-                        ? "<sup>1</sup>/<sub>4</sub>"
-                        : String(parseFloat(index / 4)).split(".")[1] === "75"
-                        ? "<sup>1</sup>/<sub>2</sub>"
-                        : "<sup>3</sup>/<sub>4</sub>"
+                          ? "<sup>1</sup>/<sub>4</sub>"
+                          : String(parseFloat(index / 4)).split(".")[1] === "75"
+                            ? "<sup>1</sup>/<sub>2</sub>"
+                            : "<sup>3</sup>/<sub>4</sub>"
                     )}
                   </small>
                 </span>

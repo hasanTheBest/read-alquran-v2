@@ -36,7 +36,6 @@ import QuranQarim from "./QuranQarim";
 
 const Banner = () => {
   return (
-    <Container>
       <Box
         sx={{
           width: "100%",
@@ -52,7 +51,6 @@ const Banner = () => {
       >
         <QuranQarim />
       </Box>
-    </Container>
   );
 };
 

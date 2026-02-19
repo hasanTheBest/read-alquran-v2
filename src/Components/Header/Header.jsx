@@ -166,7 +166,6 @@ const Header = () => {
             mx: "auto",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
           }}
         >
           <Toolbar>

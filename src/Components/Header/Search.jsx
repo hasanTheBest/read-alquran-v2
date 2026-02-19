@@ -85,6 +85,7 @@ const Search = () => {
           ml: 3,
           width: "auto",
         },
+        flexGrow: 1,
       })}
     >
       {/* Search Icon */}
