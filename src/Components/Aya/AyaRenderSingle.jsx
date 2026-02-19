@@ -1,73 +1,142 @@
-import React, { useContext } from "react";
-import { makeStyles } from "@mui/material";
+// import React, { useContext } from "react";
+// import { makeStyles } from "@mui/material";
+// import { teal } from "@mui/material/colors";
+// import { SettingContext } from "../../Context/SettingsContext";
+// import Words from "../Words/Words";
+// import AyaWrapper from "./AyaWrapper";
+// import ReadingMode from "./ReadingMode";
+
+// const useStyles = makeStyles((theme) => ({
+//   container: {
+//     padding: "1.5rem 1rem",
+//     backgroundColor: theme.palette.background.paper,
+//     backgroundColor: teal[50],
+//     "&:nth-child(odd)": {
+//       backgroundColor: teal[100],
+//     },
+//   },
+// }));
+
+// const AyaRenderSingle = ({
+//   content: { a_id, verse_key, text, page, words, tajweed, translation },
+// }) => {
+//   const { showWbw, selectItemFont, readingMode } = useContext(SettingContext);
+//   const ayaNum = Number(verse_key.split(":")[1]);
+//   const classes = useStyles();
+
+//   return (
+//     <>
+//       {!readingMode ? (
+//         <div className={classes.container}>
+//           {showWbw && selectItemFont === "Old Madina Mushaf" ? (
+//             <Words
+//               props={{
+//                 ayaNum,
+//                 words,
+//                 mushafFont: `QCF_P${String(page).padStart(3, 0)}`,
+//               }}
+//             />
+//           ) : (
+//             <Words
+//               props={{
+//                 ayaNum,
+//                 words,
+//                 mushafFont: null,
+//               }}
+//             />
+//           )}
+
+//           <AyaWrapper
+//             props={{
+//               text,
+//               tajweed,
+//               ayaNum,
+//               words,
+//               page,
+//               translation,
+//             }}
+//           />
+//         </div>
+//       ) : (
+//         <ReadingMode
+//           props={{
+//             text,
+//             tajweedRule: tajweed,
+//             index: ayaNum,
+//           }}
+//         />
+//       )}
+//     </>
+//   );
+// };
+
+// export default AyaRenderSingle;
+
+import React, { useContext, useMemo } from "react";
+import { Box } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import { teal } from "@mui/material/colors";
+
 import { SettingContext } from "../../Context/SettingsContext";
 import Words from "../Words/Words";
 import AyaWrapper from "./AyaWrapper";
 import ReadingMode from "./ReadingMode";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    padding: "1.5rem 1rem",
-    backgroundColor: theme.palette.background.paper,
-    backgroundColor: teal[50],
-    "&:nth-child(odd)": {
-      backgroundColor: teal[100],
-    },
+const AyaContainer = styled(Box)(({ theme }) => ({
+  padding: "1.5rem 1rem",
+  backgroundColor: teal[50],
+  "&:nth-of-type(odd)": {
+    backgroundColor: teal[100],
   },
 }));
 
-const AyaRenderSingle = ({
+function AyaRenderSingle({
   content: { a_id, verse_key, text, page, words, tajweed, translation },
-}) => {
-  const { showWbw, selectItemFont, readingMode } = useContext(SettingContext);
-  const ayaNum = Number(verse_key.split(":")[1]);
-  const classes = useStyles();
+}) {
+  const { showWbw, selectItemFont, readingMode } =
+    useContext(SettingContext);
+
+  // ✅ memoized aya number
+  const ayaNum = useMemo(() => {
+    return Number(verse_key.split(":")[1]);
+  }, [verse_key]);
+
+  // ✅ memoized mushaf font
+  const mushafFont = useMemo(() => {
+    if (showWbw && selectItemFont === "Old Madina Mushaf") {
+      return `QCF_P${String(page).padStart(3, "0")}`;
+    }
+    return null;
+  }, [showWbw, selectItemFont, page]);
+
+  if (readingMode) {
+    return (
+      <ReadingMode
+        text={text}
+        tajweedRule={tajweed}
+        index={ayaNum}
+      />
+    );
+  }
 
   return (
-    <>
-      {!readingMode ? (
-        <div className={classes.container}>
-          {showWbw && selectItemFont === "Old Madina Mushaf" ? (
-            <Words
-              props={{
-                ayaNum,
-                words,
-                mushafFont: `QCF_P${String(page).padStart(3, 0)}`,
-              }}
-            />
-          ) : (
-            <Words
-              props={{
-                ayaNum,
-                words,
-                mushafFont: null,
-              }}
-            />
-          )}
+    <AyaContainer>
+      <Words
+        ayaNum={ayaNum}
+        words={words}
+        mushafFont={mushafFont}
+      />
 
-          <AyaWrapper
-            props={{
-              text,
-              tajweed,
-              ayaNum,
-              words,
-              page,
-              translation,
-            }}
-          />
-        </div>
-      ) : (
-        <ReadingMode
-          props={{
-            text,
-            tajweedRule: tajweed,
-            index: ayaNum,
-          }}
-        />
-      )}
-    </>
+      <AyaWrapper
+        text={text}
+        tajweed={tajweed}
+        ayaNum={ayaNum}
+        words={words}
+        page={page}
+        translation={translation}
+      />
+    </AyaContainer>
   );
-};
+}
 
-export default AyaRenderSingle;
+export default React.memo(AyaRenderSingle);
