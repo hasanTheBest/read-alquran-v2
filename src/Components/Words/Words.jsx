@@ -244,7 +244,7 @@ const Words = ({  words, mushafFont, ayaNum } ) => {
             variant="h3"
             component="b"
             sx={{
-              // fontFamily: arabicFont,
+              fontFamily: "",
               fontSize: fontSizeArabic,
             }}
           >

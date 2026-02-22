@@ -94,8 +94,8 @@ function AyaVirtualLoader() {
   const rowVirtualizer = useVirtualizer({
     count: sura?.aya?.length ?? 0,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 140, // average aya height (tune if needed)
-    overscan: 8,
+    estimateSize: () => 440, // average aya height (tune if needed)
+    overscan: 2,
   });
 
   // 🔥 Scroll to specific aya when ayaOfSura changes
@@ -118,7 +118,8 @@ function AyaVirtualLoader() {
     <div
       ref={parentRef}
       style={{
-        height: "calc(100vh - 64px)", // adjust if header exists
+        // height: "calc(100vh - 64px)", // adjust if header exists
+        height: "100%", // adjust if header exists
         width: "100%",
         overflow: "auto",
       }}
