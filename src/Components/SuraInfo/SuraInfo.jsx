@@ -1,5 +1,111 @@
-import React, { useContext, useState } from "react";
-import { makeStyles, FormControl, Select, MenuItem } from "@mui/material";
+// import React, { useContext, useState } from "react";
+// import { makeStyles, FormControl, Select, MenuItem } from "@mui/material";
+
+// import suraMeta from "../SuraInfo/data/suraMeta.json";
+// import Bismillah from "./Bismillah";
+// import SelectSura from "./SelectSura";
+// import ExploreSuraMeta from "./ExploreSuraMeta";
+// import { SuraContext } from "../../Context/SuraContextProvider";
+
+// const useStyles = makeStyles((theme) => ({
+//   formControl: {
+//     marginRight: "2rem",
+//   },
+//   bannerSuraInfo: {
+//     width: "100%",
+//     height: 230,
+//     position: "relative",
+//     background: theme.palette.primary.light,
+//     marginTop: 64,
+//     display: "flex",
+//     alignItems: "center",
+//     flexDirection: "column",
+//     justifyContent: "flex-end",
+//   },
+//   goto: {
+//     marginTop: "1.5rem",
+//     textAlign: "center",
+//     "& .MuiFormControl-root": {
+//       verticalAlign: "bottom",
+//     },
+//   },
+//   link: {
+//     "&:hover": {
+//       textDecoration: "none",
+//     },
+//   },
+// }));
+
+// // Select Aya
+// const SelectAya = ({ aya }) => {
+//   const classes = useStyles();
+//   const { ayaOfSura, setAyaOfSura } = useContext(SuraContext);
+
+//   let optionsAya = [];
+
+//   for (let i = 1; i <= aya; i++) {
+//     optionsAya = [
+//       ...optionsAya,
+//       <MenuItem value={i} className={classes.link} key={String(i)}>
+//         {i}
+//       </MenuItem>,
+//     ];
+//   }
+
+//   const handleChangeAya = (e) => setAyaOfSura(e.target.value);
+
+//   // moves the menu below the select input
+//   const menuProps = {
+//     anchorOrigin: {
+//       vertical: "bottom",
+//       horizontal: "left",
+//     },
+//     transformOrigin: {
+//       vertical: "top",
+//       horizontal: "left",
+//     },
+//     getContentAnchorEl: null,
+//   };
+
+//   return (
+//     <FormControl>
+//       <Select
+//         MenuProps={menuProps}
+//         value={ayaOfSura}
+//         onChange={handleChangeAya}
+//       >
+//         <MenuItem value={0} className={classes.link}>
+//           AYA
+//         </MenuItem>
+//         {optionsAya}
+//       </Select>
+//     </FormControl>
+//   );
+// };
+
+// // Sura info
+// const SuraInfo = ({ suraId }) => {
+//   const classes = useStyles();
+
+//   return (
+//     <>
+//       <div className={classes.bannerSuraInfo}>
+//         <ExploreSuraMeta info={suraMeta.suras.sura} id={suraId} />
+
+//         <div className={classes.goto}>
+//           <SelectSura suraList={suraMeta.suras.sura} />
+//           <SelectAya aya={suraMeta.suras.sura[suraId - 1].ayas} />
+//         </div>
+//       </div>
+
+//       {Number(suraId) !== 1 && Number(suraId) !== 9 && <Bismillah />}
+//     </>
+//   );
+// };
+// export default SuraInfo;
+
+import React, { useContext, useMemo } from "react";
+import { Box, FormControl, Select, MenuItem } from "@mui/material";
 
 import suraMeta from "../SuraInfo/data/suraMeta.json";
 import Bismillah from "./Bismillah";
@@ -7,99 +113,94 @@ import SelectSura from "./SelectSura";
 import ExploreSuraMeta from "./ExploreSuraMeta";
 import { SuraContext } from "../../Context/SuraContextProvider";
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    marginRight: "2rem",
-  },
-  bannerSuraInfo: {
-    width: "100%",
-    height: 230,
-    position: "relative",
-    background: theme.palette.primary.light,
-    marginTop: 64,
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    justifyContent: "flex-end",
-  },
-  goto: {
-    marginTop: "1.5rem",
-    textAlign: "center",
-    "& .MuiFormControl-root": {
-      verticalAlign: "bottom",
-    },
-  },
-  link: {
-    "&:hover": {
-      textDecoration: "none",
-    },
-  },
-}));
-
-// Select Aya
+/* =========================
+   Select Aya Component
+========================= */
 const SelectAya = ({ aya }) => {
-  const classes = useStyles();
   const { ayaOfSura, setAyaOfSura } = useContext(SuraContext);
 
-  let optionsAya = [];
-
-  for (let i = 1; i <= aya; i++) {
-    optionsAya = [
-      ...optionsAya,
-      <MenuItem value={i} className={classes.link} key={String(i)}>
-        {i}
-      </MenuItem>,
-    ];
-  }
-
-  const handleChangeAya = (e) => setAyaOfSura(e.target.value);
-
-  // moves the menu below the select input
-  const menuProps = {
-    anchorOrigin: {
-      vertical: "bottom",
-      horizontal: "left",
-    },
-    transformOrigin: {
-      vertical: "top",
-      horizontal: "left",
-    },
-    getContentAnchorEl: null,
+  const handleChangeAya = (e) => {
+    setAyaOfSura(Number(e.target.value));
   };
 
+  const options = useMemo(
+    () =>
+      Array.from({ length: aya }, (_, i) => (
+        <MenuItem value={i + 1} key={i + 1}>
+          {i + 1}
+        </MenuItem>
+      )),
+    [aya]
+  );
+
   return (
-    <FormControl>
+    <FormControl size="small">
       <Select
-        MenuProps={menuProps}
         value={ayaOfSura}
         onChange={handleChangeAya}
+        displayEmpty
+        MenuProps={{
+          anchorOrigin: {
+            vertical: "bottom",
+            horizontal: "left",
+          },
+          transformOrigin: {
+            vertical: "top",
+            horizontal: "left",
+          },
+        }}
       >
-        <MenuItem value={0} className={classes.link}>
-          AYA
-        </MenuItem>
-        {optionsAya}
+        <MenuItem value={0}>AYA</MenuItem>
+        {options}
       </Select>
     </FormControl>
   );
 };
 
-// Sura info
+/* =========================
+   Main SuraInfo Component
+========================= */
 const SuraInfo = ({ suraId }) => {
-  const classes = useStyles();
+  const suraData = suraMeta.suras.sura[suraId - 1];
 
   return (
     <>
-      <div className={classes.bannerSuraInfo}>
-        <ExploreSuraMeta info={suraMeta.suras.sura} id={suraId} />
+      <Box
+        sx={(theme) => ({
+          width: "100%",
+          height: 230,
+          position: "relative",
+          background: theme.palette.primary.light,
+          mt: 8,
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          pb: 2,
+        })}
+      >
+        <ExploreSuraMeta
+          info={suraMeta.suras.sura}
+          id={suraId}
+        />
 
-        <div className={classes.goto}>
+        <Box
+          sx={{
+            mt: 2,
+            textAlign: "center",
+            display: "flex",
+            gap: 2,
+            alignItems: "center",
+          }}
+        >
           <SelectSura suraList={suraMeta.suras.sura} />
-          <SelectAya aya={suraMeta.suras.sura[suraId - 1].ayas} />
-        </div>
-      </div>
+          <SelectAya aya={suraData.ayas} />
+        </Box>
+      </Box>
 
       {Number(suraId) !== 1 && Number(suraId) !== 9 && <Bismillah />}
     </>
   );
 };
-export default SuraInfo;
+
+export default React.memo(SuraInfo);

@@ -142,10 +142,10 @@
 
 import React, { useContext } from "react";
 import { Typography, Box } from "@mui/material";
-import reactHtmlParser from "react-html-parser";
+import parse from "html-react-parser";
 import { SettingContext } from "../../Context/SettingsContext";
 
-const Words = ({ props: { words, mushafFont, ayaNum } }) => {
+const Words = ({  words, mushafFont, ayaNum } ) => {
   const {
     showWbwTransliteration,
     showWbwTranslation,
@@ -168,7 +168,7 @@ const Words = ({ props: { words, mushafFont, ayaNum } }) => {
         const { text, id, char_type, code, translation: trans } = word;
 
         const displayText =
-          mushafFont && code ? reactHtmlParser(code) : text || "";
+          mushafFont && code ? parse(code) : text || "";
 
         const arabicFont =
           selectItemFont === "Old Madina Mushaf" ? mushafFont : selectItemFont;
@@ -244,7 +244,7 @@ const Words = ({ props: { words, mushafFont, ayaNum } }) => {
             variant="h3"
             component="b"
             sx={{
-              fontFamily: arabicFont,
+              // fontFamily: arabicFont,
               fontSize: fontSizeArabic,
             }}
           >

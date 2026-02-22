@@ -18,8 +18,8 @@ const SettingProvider = ({ children }) => {
   });
 
   const [stateSlider, setStateSlider] = useState({
-    fontSizeArabic: 40,
-    fontSizeTranslation: 18,
+    fontSizeArabic: 25,
+    fontSizeTranslation: 12,
   });
 
   const [stateSelect, setStateSelect] = useState({

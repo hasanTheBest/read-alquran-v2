@@ -250,7 +250,7 @@ import AyaVirtualLoader from "./AyaVirtualLoader";
 import Drawer from "../Header/Drawer/Drawer";
 
 import borderClip from "./border.png";
-import teal from "@mui/material/colors/teal";
+// import teal from "@mui/material/colors/teal";
 
 const MaxWidthWrapper = styled(Container)({
   maxWidth: 890,
