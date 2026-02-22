@@ -12,7 +12,7 @@ const Home = () => {
       <Header />
       <Banner />
       <Index />
-      <Footer />
+      {/* <Footer /> */}
     </IndexContextProvider>
 
   );

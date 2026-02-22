@@ -5,6 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import SettingProvider from "./Context/SettingsContext";
 import "./App.css"
+import Footer from "./Components/Footer/Footer";
 
 const Home = lazy(() => import("./Containers/Home"));
 const Sura = lazy(() => import("./Containers/Sura"));
@@ -23,17 +24,18 @@ function App() {
           },
         }}
       > */}
-        <Router>
-          <SettingProvider>
-            <Suspense fallback={<div>Loading...</div>}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/sura/:suraId" element={<Sura />} />
-                <Route path="*" element={<div>404 Not Found</div>} />
-              </Routes>
-            </Suspense>
-          </SettingProvider>
-        </Router>
+      <Router>
+        <SettingProvider>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/sura/:suraId" element={<Sura />} />
+              <Route path="*" element={<div>404 Not Found</div>} />
+            </Routes>
+            <Footer />
+          </Suspense>
+        </SettingProvider>
+      </Router>
       {/* </WebfontLoader> */}
     </ThemeProvider>
   );

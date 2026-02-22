@@ -86,8 +86,8 @@ export default function SliderNav() {
           valueLabelDisplay="auto"
           valueLabelFormat={(value) => `${value}px`}
           aria-labelledby="font-size-arabic"
-          min={30}
-          max={70}
+          min={20}
+          max={50}
         />
       </Box>
 
@@ -105,8 +105,8 @@ export default function SliderNav() {
           valueLabelDisplay="auto"
           valueLabelFormat={(value) => `${value}px`}
           aria-labelledby="font-size-translation"
-          min={14}
-          max={34}
+          min={10}
+          max={24}
         />
       </Box>
     </Box>

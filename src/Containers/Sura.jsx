@@ -91,10 +91,9 @@ const Sura = () => {
   return (
     <Suspense fallback={<Loading />}>
       <SuraContextProvider>
-        {/* <Header /> */}
+        <Header />
         <SuraInfo suraId={parsedSuraId} />
         <Aya />
-        <Footer />
       </SuraContextProvider>
     </Suspense>
   );
