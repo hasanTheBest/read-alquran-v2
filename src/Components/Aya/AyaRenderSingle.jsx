@@ -83,11 +83,11 @@ import AyaWrapper from "./AyaWrapper";
 import ReadingMode from "./ReadingMode";
 
 const AyaContainer = styled(Box)(({ theme }) => ({
-  padding: "1.5rem 1rem",
-  backgroundColor: teal[50],
-  "&:nth-of-type(odd)": {
-    backgroundColor: teal[100],
-  },
+  padding: ".5rem",
+  // backgroundColor: teal[50],
+  // "&:nth-of-type(odd)": {
+  //   backgroundColor: teal[100],
+  // },
 }));
 
 function AyaRenderSingle({

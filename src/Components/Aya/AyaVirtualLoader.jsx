@@ -147,7 +147,7 @@ function AyaVirtualLoader() {
           <div
             key={virtualRow.key}
             data-index={virtualRow.key}
-            ref={rowVirtualizer.measureElement}
+            ref={measureRef}
             style={{
               position: "absolute",
               top: 0,
