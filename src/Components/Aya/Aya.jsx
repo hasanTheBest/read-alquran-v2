@@ -235,6 +235,7 @@ import { useLocation } from "react-router-dom";
 
 import { SettingContext } from "../../Context/SettingsContext";
 import { SuraContext } from "../../Context/SuraContextProvider";
+import "./TajweedStyle.css"
 
 import {
   Box,

@@ -4,8 +4,9 @@ import { ThemeProvider } from "@mui/material/styles";
 // import WebfontLoader from "@dr-kobros/react-webfont-loader";
 import theme from "./theme";
 import SettingProvider from "./Context/SettingsContext";
-import "./App.css"
 import Footer from "./Components/Footer/Footer";
+import "./App.css"
+import "../public/fonts/aya/custom-font.css"
 
 const Home = lazy(() => import("./Containers/Home"));
 const Sura = lazy(() => import("./Containers/Sura"));
