@@ -5,19 +5,19 @@ import useSuspenseFetch from "../Hooks/useSuspenseFetch";
 export const SuraContext = createContext();
 
 const SuraContextProvider = ({ children }) => {
-  const [ayaOfSura, setAyaOfSura] = useState(0);
   let { suraId } = useParams();
-  let ayaId;
+  const [ayaOfSura, setAyaOfSura] = useState(!Number(suraId) ? suraId.split(":")[1] : 1);
+  // let ayaId;
 
   if (!Number(suraId)) {
     suraId = suraId.split(":")[0];
-    ayaId = suraId.split(":")[1];
+    // ayaId = suraId.split(":")[1];
   }
 
   const sura = useSuspenseFetch("default", suraId);
 
   const value = {
-    ayaId: Number(ayaId) ? Number(ayaId) : 1,
+    // ayaId: Number(ayaId) ? Number(ayaId) : 1,
     ayaCount: sura.aya.length,
     suraId,
     sura,

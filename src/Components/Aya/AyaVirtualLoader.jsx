@@ -120,7 +120,7 @@ function AyaVirtualLoader() {
       ayaOfSura >= 0 &&
       ayaOfSura < (sura?.aya?.length ?? 0)
     ) {
-      rowVirtualizer.scrollToIndex(ayaOfSura, {
+      rowVirtualizer.scrollToIndex(ayaOfSura - 1, {
         align: "start",
         behavior: "auto", // use "smooth" if needed
       });
@@ -139,27 +139,35 @@ function AyaVirtualLoader() {
         position: "relative"
       }}
     >
+      <div
+        style={{
+          height: `${rowVirtualizer.getTotalSize()}px`,
+          width: "100%",
+          position: "relative",
+        }}
+      >
 
-      {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-        const aya = sura.aya[virtualRow.index];
+        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+          const aya = sura.aya[virtualRow.index];
 
-        return (
-          <div
-            key={virtualRow.key}
-            data-index={virtualRow.key}
-            ref={measureRef}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              transform: `translateY(${virtualRow.start}px)`,
-            }}
-          >
-            <AyaRenderSingle content={aya} />
-          </div>
-        );
-      })}
+          return (
+            <div
+              key={virtualRow.key}
+              data-index={virtualRow.key}
+              ref={measureRef}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                transform: `translateY(${virtualRow.start}px)`,
+              }}
+            >
+              <AyaRenderSingle content={aya} />
+            </div>
+          );
+        })}
+      </div>
     </div>
 
   );

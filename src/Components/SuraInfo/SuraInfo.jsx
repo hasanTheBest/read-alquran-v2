@@ -150,7 +150,6 @@ const SelectAya = ({ aya }) => {
           },
         }}
       >
-        <MenuItem value={0}>AYA</MenuItem>
         {options}
       </Select>
     </FormControl>

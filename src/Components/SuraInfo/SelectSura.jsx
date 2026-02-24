@@ -117,7 +117,7 @@
 
 // export default SelectSura;
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import {
   FormControl,
@@ -127,12 +127,16 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import { SuraContext } from "../../Context/SuraContextProvider";
 
 const SelectSura = ({ suraList }) => {
-  const [val, setVal] = useState(0);
+  const {suraId, setAyaOfSura} = useContext(SuraContext)
+  const [val, setVal] = useState(suraId);
 
   const handleChange = (event) => {
     setVal(event.target.value);
+    // reset to ayah number 1. when sura changes
+    setAyaOfSura(1)
   };
 
   const items = useMemo(
@@ -202,7 +206,7 @@ const SelectSura = ({ suraList }) => {
           },
         }}
       >
-        <MenuItem value={0}>SURA</MenuItem>
+        {/* <MenuItem value={0}>SURA</MenuItem> */}
         {items}
       </Select>
     </FormControl>
