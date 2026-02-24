@@ -141,7 +141,7 @@ const SelectSura = ({ suraList }) => {
         <MenuItem value={index} key={index}>
           <Link
             component={RouterLink}
-            to={`${index}`}
+            to={`/sura/${index}`}
             underline="none"
             color="inherit"
             sx={{ width: "100%", display: "block" }}

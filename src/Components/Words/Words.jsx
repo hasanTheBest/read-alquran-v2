@@ -189,7 +189,7 @@ const Words = ({  words, mushafFont, ayaNum } ) => {
             {/* Arabic Word */}
             <Typography
               variant="h3"
-              component="b"
+              // component="b"
               sx={{
                 fontFamily: arabicFont,
                 fontSize: fontSizeArabic,
@@ -212,7 +212,7 @@ const Words = ({  words, mushafFont, ayaNum } ) => {
             {/* Translation */}
             {char_type === "word" && showWbwTranslation && trans && (
               <Typography
-                variant="body2"
+                // variant="body2"
                 color="textSecondary"
                 component="span"
                 sx={{
@@ -231,26 +231,26 @@ const Words = ({  words, mushafFont, ayaNum } ) => {
 
       {/* Aya Number */}
       {selectItemFont !== "Old Madina Mushaf" && (
-        <Box
-          sx={{
-            display: "inline-flex",
-            flexDirection: "column",
-            textAlign: "center",
-            borderRadius: "0.5rem",
-            p: 0.5,
-          }}
-        >
+        // <Box
+        //   sx={{
+        //     display: "inline-flex",
+        //     flexDirection: "column",
+        //     textAlign: "center",
+        //     borderRadius: "0.5rem",
+        //     p: 0.5,
+        //   }}
+        // >
           <Typography
-            variant="h3"
-            component="b"
+            // variant="h3"
+            // component="b"
             sx={{
-              fontFamily: "",
+              // fontFamily: "",
               fontSize: fontSizeArabic,
             }}
           >
             {ayaNum.toLocaleString("ar-EG")}
           </Typography>
-        </Box>
+        // </Box>
       )}
     </Box>
   );

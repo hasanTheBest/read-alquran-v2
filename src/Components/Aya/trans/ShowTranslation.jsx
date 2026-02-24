@@ -46,8 +46,9 @@ const ShowTranslation = ({ translation, index, locale = "en" }) => {
       component="p"
       sx={{
         fontSize: fontSizeTranslation,
-        letterSpacing: 1,
-        padding: "0.5rem",
+        // letterSpacing: 1,
+        // padding: "0.5rem",
+        marginTop: ".2em"
       }}
     >
       {index.toLocaleString(locale)}. {translation}

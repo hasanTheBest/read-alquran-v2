@@ -83,7 +83,7 @@ import AyaWrapper from "./AyaWrapper";
 import ReadingMode from "./ReadingMode";
 
 const AyaContainer = styled(Box)(({ theme }) => ({
-  padding: ".5rem",
+  padding: ".5rem 1.5rem .5rem .5rem",
   // backgroundColor: teal[50],
   // "&:nth-of-type(odd)": {
   //   backgroundColor: teal[100],

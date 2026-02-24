@@ -266,9 +266,9 @@ const SuraWrapper = styled("div")({
 const PageContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== "readingmode",
 })(({ readingmode }) => ({
-  border: "1.5rem solid teal",
+  // border: "1.5rem solid teal",
   width: "100%",
-  borderImage: `url(${borderClip}) 30 repeat`,
+  // borderImage: `url(${borderClip}) 30 repeat`,
   textAlign: readingmode ? "center" : "inherit",
 }));
 
@@ -276,7 +276,7 @@ const Aya = () => {
   const { showWbw, selectItemFont, readingMode } =
     useContext(SettingContext);
 
-  const { sura } = useContext(SuraContext);
+  // const { sura } = useContext(SuraContext);
 
   const theme = useTheme();
   const breakUp1440 = useMediaQuery(theme.breakpoints.up(1440));
