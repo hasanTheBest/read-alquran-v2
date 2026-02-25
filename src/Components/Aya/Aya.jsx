@@ -251,6 +251,7 @@ import AyaVirtualLoader from "./AyaVirtualLoader";
 import Drawer from "../Header/Drawer/Drawer";
 
 import borderClip from "./border.png";
+import PageVirtualLoader from "./pageVirtualLoader";
 // import teal from "@mui/material/colors/teal";
 
 const MaxWidthWrapper = styled(Container)({
@@ -311,9 +312,10 @@ const Aya = () => {
           }}
         > */}
           <MaxWidthWrapper>
-            <PageContainer readingmode={readingMode}>
-              <AyaVirtualLoader />
-            </PageContainer>
+            {/* <PageContainer readingmode={readingMode ? 1 : 0}> */}
+            {readingMode ? (<PageVirtualLoader />) : (<AyaVirtualLoader />)}
+              
+            {/* </PageContainer> */}
           </MaxWidthWrapper>
         {/* </WebfontLoader> */}
       </SuraWrapper>
