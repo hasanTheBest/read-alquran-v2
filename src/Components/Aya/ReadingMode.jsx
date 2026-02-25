@@ -28,20 +28,10 @@ import React from "react";
 import { Box } from "@mui/material";
 import AyaArabic from "./AyaArabic";
 
-const ReadingMode = ({ props }) => {
+const ReadingMode = (props) => {
   return (
-    <Box
-      p={3}
-      sx={{
-        display: "inline",
-        textAlign: "center",
-        "& > h5": {
-          display: "inline",
-        },
-      }}
-    >
+    
       <AyaArabic {...props} />
-    </Box>
   );
 };
 

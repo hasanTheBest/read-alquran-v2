@@ -88,6 +88,7 @@ import AyaRenderSingle from "./AyaRenderSingle";
 
 function AyaVirtualLoader() {
   const { sura, ayaOfSura } = useContext(SuraContext);
+  // const { suraAya } = useParams(); // example: "2:25"
 
   const parentRef = useRef(null);
 
@@ -115,11 +116,13 @@ function AyaVirtualLoader() {
 
   // 🔥 Scroll to specific aya when ayaOfSura changes
   useEffect(() => {
-    if (
+    // if (!suraAya) return;
+   if (
       typeof ayaOfSura === "number" &&
-      ayaOfSura >= 0 &&
-      ayaOfSura < (sura?.aya?.length ?? 0)
+      ayaOfSura >= 1 &&
+      ayaOfSura <= sura?.aya?.length
     ) {
+      // console.log("ayaOfSura =>", ayaOfSura)
       rowVirtualizer.scrollToIndex(ayaOfSura - 1, {
         align: "start",
         behavior: "auto", // use "smooth" if needed
@@ -153,7 +156,7 @@ function AyaVirtualLoader() {
           return (
             <div
               key={virtualRow.key}
-              data-index={virtualRow.key}
+              data-index={virtualRow.index}
               ref={measureRef}
               style={{
                 position: "absolute",

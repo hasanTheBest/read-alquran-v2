@@ -311,7 +311,7 @@ const Aya = () => {
           }}
         > */}
           <MaxWidthWrapper>
-            <PageContainer readingmode={readingMode ? 1 : 0}>
+            <PageContainer readingmode={readingMode}>
               <AyaVirtualLoader />
             </PageContainer>
           </MaxWidthWrapper>

@@ -93,7 +93,7 @@ const AyaContainer = styled(Box)(({ theme }) => ({
 function AyaRenderSingle({
   content: { a_id, verse_key, text, page, words, tajweed, translation },
 }) {
-  const { showWbw, selectItemFont, readingMode } =
+  const { showWbw,  selectItemFont, readingMode } =
     useContext(SettingContext);
 
   // ✅ memoized aya number
@@ -121,11 +121,13 @@ function AyaRenderSingle({
 
   return (
     <AyaContainer>
-      <Words
-        ayaNum={ayaNum}
-        words={words}
-        mushafFont={mushafFont}
-      />
+      {showWbw && (
+        <Words
+          ayaNum={ayaNum}
+          words={words}
+          mushafFont={mushafFont}
+        />
+      )}
 
       <AyaWrapper
         text={text}
