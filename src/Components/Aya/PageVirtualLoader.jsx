@@ -16,8 +16,6 @@ function pageVirtualLoader() {
   const { sura } = useContext(SuraContext);
   const parentRef = useRef(null);
 
-  console.log(sura)
-
   const pages = groupAyatIntoPages(sura?.aya ?? [], 15);
 
   const rowVirtualizer = useVirtualizer({
@@ -63,17 +61,16 @@ function pageVirtualLoader() {
               >
                 <div
                   style={{
+                    // display: "inline-flex",
+                    // flexWrap: "wrap",
                     direction: "rtl",
-                    fontSize: "28px",
-                    lineHeight: 2,
-                    fontFamily: "Amiri Quran",
-                    textAlign: "justify",
+                    textAlign: "justify"
                   }}
                 >
                   {page.map(({tajweed, text, verse_key}) => (
-                    <span key={verse_key}>
+                    <React.Fragment key={verse_key}>
                       <AyaArabic tajweedRule={tajweed} text={text} index={Number(verse_key.split(":")[1])} />
-                    </span>
+                    </React.Fragment>
                   ))}
                 </div>
               </div>
