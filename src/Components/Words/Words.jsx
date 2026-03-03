@@ -145,7 +145,7 @@ import { Typography, Box } from "@mui/material";
 import parse from "html-react-parser";
 import { SettingContext } from "../../Context/SettingsContext";
 
-const Words = ({  words, mushafFont, ayaNum } ) => {
+const Words = ({ words, mushafFont, ayaNum }) => {
   const {
     showWbwTransliteration,
     showWbwTranslation,
@@ -154,6 +154,8 @@ const Words = ({  words, mushafFont, ayaNum } ) => {
     selectItemFont,
     wordTranslation,
   } = useContext(SettingContext);
+
+
 
   return (
     <Box
@@ -173,60 +175,63 @@ const Words = ({  words, mushafFont, ayaNum } ) => {
         const arabicFont =
           selectItemFont === "Old Madina Mushaf" ? mushafFont : selectItemFont;
 
-        return (
-          <Box
-            key={id}
-            sx={{
-              display: "inline-flex",
-              flexDirection: "column",
-              textAlign: "center",
-              borderRadius: "0.5rem",
-              p: 0.5,
-              borderBottom: 1,
-              borderColor: "divider",
-            }}
-          >
-            {/* Arabic Word */}
-            <Typography
-              variant="h3"
-              // component="b"
+
+        if (text) {
+          return (
+            <Box
+              key={id}
               sx={{
-                fontFamily: arabicFont,
-                fontSize: fontSizeArabic,
+                display: "inline-flex",
+                flexDirection: "column",
+                textAlign: "center",
+                borderRadius: "0.5rem",
+                p: 0.5,
+                borderBottom: 1,
+                borderColor: "divider",
               }}
             >
-              {displayText}
-            </Typography>
-
-            {/* Transliteration */}
-            {showWbwTransliteration && trans?.trl && (
+              {/* Arabic Word */}
               <Typography
-                variant="body2"
-                color="textSecondary"
                 component="span"
-              >
-                {trans.trl}
-              </Typography>
-            )}
-
-            {/* Translation */}
-            {char_type === "word" && showWbwTranslation && trans && (
-              <Typography
-                // variant="body2"
-                color="textSecondary"
-                component="span"
+                // component="b"
                 sx={{
-                  fontSize:
-                    wordTranslation === "word-tr-bangla"
-                      ? fontSizeTranslation
-                      : "inherit",
+                  fontFamily: arabicFont,
+                  fontSize: fontSizeArabic,
                 }}
               >
-                {wordTranslation === "word-tr-bangla" ? trans.bn : trans.en}
+                {displayText}
               </Typography>
-            )}
-          </Box>
-        );
+
+              {/* Transliteration */}
+              {showWbwTransliteration && trans?.trl && (
+                <Typography
+                  // variant="body2"
+                  // color="textSecondary"
+                  component="span"
+                >
+                  {trans.trl}
+                </Typography>
+              )}
+
+              {/* Translation */}
+              {showWbwTranslation && trans && (
+                <Typography
+                  // variant="body2"
+                  // color="textSecondary"
+                  component="span"
+                  sx={{
+                    fontSize:
+                      wordTranslation === "word-tr-bangla"
+                        ? fontSizeTranslation
+                        : "inherit",
+                  }}
+                >
+                  {wordTranslation === "word-tr-bangla" ? trans.bn : trans.en}
+                </Typography>
+              )}
+            </Box>
+          )
+        }
       })}
 
       {/* Aya Number */}
@@ -240,16 +245,17 @@ const Words = ({  words, mushafFont, ayaNum } ) => {
         //     p: 0.5,
         //   }}
         // >
-          <Typography
-            // variant="h3"
-            // component="b"
-            sx={{
-              // fontFamily: "",
-              fontSize: fontSizeArabic,
-            }}
-          >
-            {ayaNum.toLocaleString("ar-EG")}
-          </Typography>
+        <Typography
+          // variant="h3"
+          component="span"
+          sx={{
+            fontFamily: "inherit",
+            alignSelf: "center",
+            fontSize: fontSizeArabic,
+          }}
+        >
+          {ayaNum.toLocaleString("ar-EG")}
+        </Typography>
         // </Box>
       )}
     </Box>

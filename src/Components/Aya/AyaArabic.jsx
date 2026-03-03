@@ -94,17 +94,19 @@ const AyahContainer = styled(Typography, {
   fontFamily: fontfamily,
   fontSize: fontsizearabic,
   fontWeight: 500,
-  textAlign: "right",
+  textAlign: "justify",
   lineHeight: 2,
-  // display: "block"
+  display: "inline"
+
 }));
 
 const AyahNumber = styled(Typography)({
-  // fontFamily: "inherit",
-  // fontWeight: 400,
+  fontFamily: "inherit",
   marginRight: ".5rem",
-  // display: "inline",
+  fontSize: "inherit"
   // fontSize: "1.5em"
+  // fontWeight: 400,
+  // display: "inline",
 });
 
 const AyaArabic = ({ tajweedRule, text, index }) => {
@@ -132,11 +134,9 @@ const AyaArabic = ({ tajweedRule, text, index }) => {
     >
       {parsedText}
 
-      {/* <AyahNumber component="span"> */}
-      <span>
+      <AyahNumber component="span">
         {index.toLocaleString("ar-EG")}
-      </span>
-      {/* </AyahNumber> */}
+      </AyahNumber>
     </AyahContainer>
   );
 };
