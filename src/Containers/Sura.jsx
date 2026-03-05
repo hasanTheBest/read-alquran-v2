@@ -6,7 +6,7 @@ import { Backdrop, CircularProgress } from "@mui/material";
 import Header from "../Components/Header/Header";
 import SuraInfo from "../Components/SuraInfo/SuraInfo";
 import SuraContextProvider from "../Context/SuraContextProvider";
-import MushafContextProvider from "../Context/MushafPageContextProvider";
+import MushafPageContextProvider from "../Context/MushafPageContextProvider";
 
 const Aya = lazy(() => import("../Components/Aya/Aya"));
 
@@ -41,9 +41,9 @@ const Sura = () => {
       <SuraContextProvider>
         <Header />
         <SuraInfo suraId={parsedSuraId} />
-        <mushafPageContextProvider>
-        <Aya />
-        </mushafPageContextProvider>
+        <MushafPageContextProvider>
+          <Aya />
+        </MushafPageContextProvider>
       </SuraContextProvider>
     </Suspense>
   );

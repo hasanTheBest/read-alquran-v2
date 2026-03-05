@@ -21,31 +21,29 @@ export async function getPageFromVerse(verseKey, anchoringSura) {
   return Number(ayah.page);
 }
 
-export async function getSuraAyahsCountFromPage(pageNumber) {
-
+export function getSuraAyahsCountFromPage(pageNumber) {
   // suras belongs to the page
   const currentPage = pageMeta.pages.page[pageNumber - 1]
-  const nextPage = pageNumber !== 114 && pageMeta.pages.page[pageNumber]
-
+  const nextPage = pageMeta.pages.page[pageNumber]
   const { sura: currentPageSura, aya: currentPageAya } = currentPage
-  const { sura: nextPageSura, aya: nextPageAya } = nextPage && nextPage
+  const { sura: nextPageSura, aya: nextPageAya } = nextPage 
 
   const suraToRetrieve = [];
   const ayahToRetrieve = [];
 
-  const currentSura = Number(currentPageSura);
-  const nextSura = Number(nextPageSura);
-  const currentAya = Number(currentPageAya);
-  const nextAya = Number(nextPageAya);
-
-  // Case 1: No next page → return last 3 surahs
+// Case 1: No next page → return last 3 surahs
   if (!nextPage) {
     suraToRetrieve.push(112, 113, 114);
     ayahToRetrieve.push("-", "-", "-");
     return { suraToRetrieve, ayahToRetrieve };
   }
 
-  // Case 2: Same surah → difference in ayahs
+  const currentSura = Number(currentPageSura);
+  const nextSura = Number(nextPageSura);
+  const currentAya = Number(currentPageAya);
+  const nextAya = Number(nextPageAya);
+
+    // Case 2: Same surah → difference in ayahs
   if (currentSura === nextSura) {
     suraToRetrieve.push(currentSura);
     ayahToRetrieve.push(`${currentAya}-${nextAya}`); // "20-26"
@@ -75,12 +73,14 @@ export async function getSuraAyahsCountFromPage(pageNumber) {
   return { suraToRetrieve, ayahToRetrieve };
 }
 
-export async function getAyahs(suraIds, ayahToRetrieve) {
+export function getAyahs(suraIds, ayahToRetrieve) {
   const pageAyahs = [];
 
   for (const id of suraIds) {
-    const sura = await useSuspenseFetch(id);
+    const sura = useSuspenseFetch("default", id);
     const ayahs = sura.aya;
+
+    console.log(ayahToRetrieve)
 
     // Case: "-", "2-", "-40", "20-26"
     const [startStr, endStr] = (ayahToRetrieve || "-").split("-");

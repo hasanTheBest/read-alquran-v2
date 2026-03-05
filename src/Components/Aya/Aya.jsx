@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 // import WebfontLoader from "@dr-kobros/react-webfont-loader";
 
 import { SettingContext } from "../../Context/SettingsContext";
-import { SuraContext } from "../../Context/SuraContextProvider";
 import "./TajweedStyle.css"
 
 import {
@@ -19,9 +18,8 @@ import { styled } from "@mui/material/styles";
 import AyaVirtualLoader from "./AyaVirtualLoader";
 import Drawer from "../Header/Drawer/Drawer";
 
-import borderClip from "./border.png";
 import PageVirtualLoader from "./pageVirtualLoader";
-// import teal from "@mui/material/colors/teal";
+import MushafPage from "./mushafPage";
 
 const MaxWidthWrapper = styled(Container)({
   maxWidth: 790,
@@ -73,7 +71,8 @@ const Aya = () => {
             maxWidth: "800px",
             margin: "0 auto"
           }}>
-            {readingMode ? (<PageVirtualLoader />) : (<AyaVirtualLoader />)}
+            {readingMode ? (<MushafPage />) : (<AyaVirtualLoader />)}
+            {/* {readingMode ? (<PageVirtualLoader />) : (<AyaVirtualLoader />)} */}
           </Container>
         {/* </WebfontLoader> */}
       </SuraWrapper>

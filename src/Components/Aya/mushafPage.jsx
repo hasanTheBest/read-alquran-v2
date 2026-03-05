@@ -1,16 +1,23 @@
+import React from "react"
 import { useContext } from "react"
-import { mushafPageContext } from "../../Context/MushafPageContextProvider"
-export default function mushafPage() {
-  const { pageAyahs } = useContext(mushafPageContext)
+import { MushafPageContext } from "../../Context/MushafPageContextProvider"
+
+function MushafPage() {
+  const pageAyahs  = useContext(MushafPageContext)
+  
+  console.log("pageAyahs", pageAyahs)
 
   return (
     <React.Fragment>
-
-      {pageAyahs.map(({ tajweed, text, verse_key }) => (
+      { 
+      pageAyahs.map(({ tajweed, text, verse_key }) => (
         <React.Fragment key={verse_key}>
           <AyaArabic tajweedRule={tajweed} text={text} index={Number(verse_key.split(":")[1])} />
         </React.Fragment>
-      ))}
+      ))
+      }
     </React.Fragment>
   )
 }
+
+export default MushafPage;

@@ -3,7 +3,7 @@ import md5 from "md5";
 
 const cache = new LRU(500);
 
-const useSuspenseFetch = (dir, id) => {
+const useSuspenseFetch = (dir = "default", id) => {
   const key = `suraArabic.${md5(JSON.stringify(dir + id))}`;
   const value = cache.get(key) || { status: "new", data: null };
 
