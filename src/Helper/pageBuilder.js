@@ -1,4 +1,5 @@
 import pageMeta from '../Components/SuraIndex/data/pageMeta.json'
+import useSuspenseFetch from '../Hooks/useSuspenseFetch';
 
 export function parseVerseKey(verseKey) {
   const [surahId, ayahId = 1] = verseKey.split(":");
@@ -20,7 +21,7 @@ export async function getPageFromVerse(verseKey, anchoringSura) {
   return Number(ayah.page);
 }
 
-export async function getSuraAyahsFromPage(pageNumber) {
+export async function getSuraAyahsCountFromPage(pageNumber) {
 
   // suras belongs to the page
   const currentPage = pageMeta.pages.page[pageNumber - 1]
@@ -47,7 +48,7 @@ export async function getSuraAyahsFromPage(pageNumber) {
   // Case 2: Same surah → difference in ayahs
   if (currentSura === nextSura) {
     suraToRetrieve.push(currentSura);
-    ayahToRetrieve.push(nextAya - currentAya);
+    ayahToRetrieve.push(`${currentAya}-${nextAya}`); // "20-26"
     return { suraToRetrieve, ayahToRetrieve };
   }
 
@@ -72,23 +73,25 @@ export async function getSuraAyahsFromPage(pageNumber) {
   }
 
   return { suraToRetrieve, ayahToRetrieve };
+}
 
+export async function getAyahs(suraIds, ayahToRetrieve) {
+  const pageAyahs = [];
 
-  const posibleSuraIds = Array.from({ length: 3 }, (_, i) => i + 1);
+  for (const id of suraIds) {
+    const sura = await useSuspenseFetch(id);
+    const ayahs = sura.aya;
 
-  let pageAyahs = [];
+    // Case: "-", "2-", "-40", "20-26"
+    const [startStr, endStr] = (ayahToRetrieve || "-").split("-");
 
-  for (let id of posibleSuraIds) {
-    const surah = await import(`./data/surah/${id}.json`);
+    const start = startStr ? Number(startStr) - 1 : 0;
+    const end = endStr ? Number(endStr) : ayahs.length;
 
-    const filtered = surah.default.aya.filter(
-      (a) => Number(a.page) === pageNumber
-    );
-
-    if (filtered.length > 0) {
-      pageAyahs.push(...filtered);
-    }
+    pageAyahs.push(...ayahs.slice(start, end));
   }
 
   return pageAyahs;
 }
+
+
