@@ -10,7 +10,7 @@ const MushafPageContextProvider = ({ children }) => {
   const { sura } = useContext(SuraContext)
   const { suraId: verseKey } = useParams(); // 2 or 2:20
 
-  // const [pageAyahs, setPageAyahs] = useState([]);
+  const [pageAyahs, setPageAyahs] = useState([]);
 
   const { ayahId } = parseVerseKey(verseKey);
 
@@ -19,22 +19,22 @@ const MushafPageContextProvider = ({ children }) => {
   const { suraToRetrieve, ayahToRetrieve } =
     getSuraAyahsCountFromPage(pageNumber);
 
-  const pageAyahs = getAyahs(suraToRetrieve, ayahToRetrieve)
+  ayahToRetrieve
 
-  // useEffect(() => {
-  //   async function loadPage() {
-  //     const pageNumber = sura.aya[ayahId - 1]["page"];
+  useEffect(() => {
+    async function loadPage() {
+      const pageNumber = sura.aya[ayahId - 1]["page"];
 
-  //     const { suraToRetrieve, ayahToRetrieve } =
-  //       getSuraAyahsCountFromPage(pageNumber);
+      const { suraToRetrieve, ayahToRetrieve } =
+        getSuraAyahsCountFromPage(pageNumber);
 
-  //     const ayahs = await getAyahs(suraToRetrieve, ayahToRetrieve);
+      const ayahs = await getAyahs(suraToRetrieve, ayahToRetrieve);
 
-  //     setPageAyahs(ayahs);
-  //   }
+      setPageAyahs(ayahs);
+    }
 
-  //   if (sura) loadPage();
-  // }, [sura, ayahId]);
+    if (sura) loadPage();
+  }, [sura, ayahId]);
 
 
   console.log("context page ayahs", pageAyahs)

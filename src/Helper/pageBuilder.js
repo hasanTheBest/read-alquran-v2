@@ -73,25 +73,41 @@ export function getSuraAyahsCountFromPage(pageNumber) {
   return { suraToRetrieve, ayahToRetrieve };
 }
 
-export function getAyahs(suraIds, ayahToRetrieve) {
-  const pageAyahs = [];
+// export function getAyahs(suraIds, ayahToRetrieve) {
+//   const pageAyahs = [];
 
-  for (const id of suraIds) {
-    const sura = useSuspenseFetch("default", id);
+//   for (const id of suraIds) {
+//     const sura = useSuspenseFetch("default", id);
+//     const ayahs = sura.aya;
+
+//     console.log(ayahToRetrieve)
+
+//     // Case: "-", "2-", "-40", "20-26"
+//     const [startStr, endStr] = (ayahToRetrieve || "-").split("-");
+
+//     const start = startStr ? Number(startStr) - 1 : 0;
+//     const end = endStr ? Number(endStr) : ayahs.length;
+
+//     pageAyahs.push(...ayahs.slice(start, end));
+//   }
+
+//   return pageAyahs;
+// }
+
+export async function getAyahs(suraIds, ayahToRetrieve) {
+
+  const [startStr, endStr] = (ayahToRetrieve || "-").split("-");
+  const start = startStr ? Number(startStr) - 1 : 0;
+  console.log("start end", start, end)
+
+  const suras = await Promise.all(
+    suraIds.map((id) => useSuspenseFetch("default", id))
+  );
+
+  return suras.flatMap((sura) => {
     const ayahs = sura.aya;
-
-    console.log(ayahToRetrieve)
-
-    // Case: "-", "2-", "-40", "20-26"
-    const [startStr, endStr] = (ayahToRetrieve || "-").split("-");
-
-    const start = startStr ? Number(startStr) - 1 : 0;
     const end = endStr ? Number(endStr) : ayahs.length;
-
-    pageAyahs.push(...ayahs.slice(start, end));
-  }
-
-  return pageAyahs;
+    return ayahs.slice(start, end);
+  });
 }
-
 
