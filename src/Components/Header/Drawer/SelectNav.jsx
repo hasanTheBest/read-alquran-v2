@@ -28,7 +28,7 @@ const SelectNav = () => {
         selectItemValue={selectItemFont}
         handleChangeSelectItem={handleChange}
         options={[
-          "Uthmanic Hafs",
+          "QPCHafs",
           "me_quran",
           "Uthmanic TN",
           "KFGQPC Uthman Taha Naskh",

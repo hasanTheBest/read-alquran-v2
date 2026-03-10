@@ -1,99 +1,54 @@
-import React from "react";
-import { Box, Typography, Tooltip } from "@mui/material";
-import { makeStyles } from "@mui/material/styles";
+import React from "react"
+import { Box, Typography, useTheme } from '@mui/material'
+import pageToSuraAya from '../../assets/data/pageToSuraAya.json'
+import { parseVerseKey } from '../../Helper/pageBuilder'
 
-const useStyles = makeStyles((theme) => ({
-  pageMetaBar: {
-    display: "flex",
-    justifyContent: "space-between",
-    "& .s_name": {
-      ...theme.typography.h4,
-    },
-  },
+function getSuraIds(pageId) {
+  const suraAyaIds = pageToSuraAya[pageId]
+  const { surahId: start } = parseVerseKey(suraAyaIds[0])
+  const { surahId: end } = parseVerseKey(suraAyaIds[suraAyaIds.length - 1])
 
-  pMetaBarItemJuz: {
-    fontFamily: "me_quran",
-    "& .juzNumber": {
-      fontFamily: "initial",
-    },
-  },
-  pMetaBarItemTopRight: {
-    display: "flex",
-  },
-  SuraNameTopRight: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-end",
-    marginRight: ".3rem",
-    lineHeight: 1,
-  },
-}));
+  const ids = []
 
-const PageMetaBarTop = ({
-  props: { juzMeta, pages, pageIndex, suraList, suraId },
-}) => {
-  const classes = useStyles();
-  const { tname, ename, ayas, name, type, rukus, order } = suraList.suras.sura[
-    Number(suraId) - 1
-  ];
-  const juz = juzMeta.juzs.juz[pages[pageIndex][0].juz - 1];
+  if (start === end) {
+    ids.push(start)
+    return ids;
+  }
 
+  for (let i = end; i >= start; i--) { ids.push(i) }
+
+  return ids;
+}
+
+function PageMetaBarTop({ pageId, juzzId }) {
+  const muiTheme = useTheme()
+  const suraIds = getSuraIds(pageId)
+  const suraNames = suraIds.map((id) => (
+    <span key={id}>surah{`${String(id).padStart(3, 0)}`}</span>
+  ))
   return (
-    <Box pt={2} pb={1} className={classes.pageMetaBar}>
-      <Tooltip
-        title={`Juz ${pages[pageIndex][0].juz}, Sura ${juz.sura}: ${juz.tname} (${juz.ename}), Aya: ${juz.aya}`}
-      >
-        <Typography
-          variant="h5"
-          component="b"
-          className={classes.pMetaBarItemJuz}
-          noWrap
-        >
-          <span className="juzNumber">
-            {/* {Number(
-              juzMeta.juzs.juz[pages[pageIndex][0].juz - 1].index
-            ).toLocaleString("ar-EG")}{" "} */}
-          </span>
-          {juz.text.split(" ")[0]} {juz.text.split(" ")[1]}
-        </Typography>
-      </Tooltip>
-
-      <Tooltip title="Page">
-        <Typography
-          variant="body1"
-          component="span"
-          className={classes.pMetaBarItem}
-        >
-          {pages[pageIndex][0].page}
-        </Typography>
-      </Tooltip>
-
-      <Tooltip
-        title={`Sura: ${name} (${type}), Ayas: ${ayas}, Rukus: ${rukus}, Revelation Order: ${order}`}
-      >
-        <Typography
-          variant="h6"
-          component="div"
-          className={classes.pMetaBarItemTopRight}
-          noWrap
-        >
-          <Typography
-            variant="subtitle2"
-            component="div"
-            className={classes.SuraNameTopRight}
-          >
-            <span>
-              {suraId}
-              {". "}
-              {tname}
-            </span>
-            <span>{ename}</span>
-          </Typography>
-          <span className={`s_name raq raq-surah${suraId}`}></span>
-        </Typography>
-      </Tooltip>
+    <Box sx={{
+      display: "flex",
+      direction: "rtl",
+      textAlign: "right",
+      justifyContent: "space-between",
+      borderBottom: `2px solid ${muiTheme.palette.secondary.light}`,
+      fontSize: muiTheme.typography.h4.fontSize,
+      lineHeight: 1,
+      padding: "1.5rem .3rem .3rem"
+    }}>
+      <Box sx={{
+        fontFamily: "juzName",
+        fontSize: muiTheme.typography.h5.fontSize,
+      }}>
+        <span>j{`${String(juzzId).padStart(3, 0)}`}</span>
+        <span>juz{`${String(juzzId).padStart(3, 0)}`}</span>
+      </Box>
+      <Box sx={{
+        fontFamily: "surahNameV2",
+      }}>{suraNames}</Box>
     </Box>
-  );
-};
+  )
+}
 
-export default PageMetaBarTop;
+export default React.memo(PageMetaBarTop)

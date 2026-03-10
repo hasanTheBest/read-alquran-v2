@@ -1,42 +1,20 @@
-// import React from "react";
-// import { Box, Typography, makeStyles } from "@mui/material";
-
-// const useStyles = makeStyles((theme) => ({
-//   bismillah: {
-//     textAlign: "center",
-//   },
-// }));
-
-// const Bismillah = () => {
-//   const classes = useStyles();
-
-//   return (
-//     <Box px={2} py={3}>
-//       <Typography className={classes.bismillah} variant="h2" component="p">
-//         <span className="raq raq-bismallah"></span>
-//         {/* بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ */}
-//       </Typography>
-//     </Box>
-//   );
-// };
-
-// export default Bismillah;
-
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, useTheme} from "@mui/material";
 
-const Bismillah = () => {
+const Bismillah = ({ayahId, surahId}) => {
+  const muiTheme = useTheme();
+  
+if(ayahId !== 1 ||surahId === 9 || surahId === 1 ) return null;
+
   return (
     <Box
       sx={{
-        px: 2,
-        py: 3,
         textAlign: "center",
+        lineHeight: 1,
+        fontSize: muiTheme.typography.h2.fontSize
       }}
     >
-      <Typography variant="h2" component="p">
         <span className="raq raq-bismallah" />
-      </Typography>
     </Box>
   );
 };

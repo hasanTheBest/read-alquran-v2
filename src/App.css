@@ -3,6 +3,37 @@
 }
 
 @font-face {
+  font-family: "QPCHafs";
+  src: local("QPCHafs"), 
+  url("./assets/fonts/QPC\ Hafs\ -\ WOFF2.woff2") format("woff2"),
+  url("./assets/fonts/QPC\ Hafs\ -\ TTF.ttf") format("truetype");
+  font-display: swap;
+  /* url("https://quranfonts.com/fonts/QPC Hafs font/UthmanicHafs_V22.woff2") format("woff2"), */
+  /* url("https://quranfonts.com/fonts/QPC Hafs font/UthmanicHafs_V22.ttf") format("truetype"); */
+}
+
+/* sura name v2 */
+@font-face {
+  font-family: "SurahNameV2";
+  src: local("SurahNameV2"),
+  url("./assets/fonts/Surah\ Name\ V2\ -\ WOFF2.woff2") format("woff2"),
+  url("./assets/fonts/Surah\ Name\ V2\ -\ WOFF.woff") format("woff"),
+  url("./assets/fonts/Surah\ Name\ V2\ -\ TTF.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* juzz name */
+@font-face {
+  font-family: "JuzName";
+  src: local("JuzName"),
+  url("./assets/fonts/Juz\ Name\ -\ WOFF2.woff2") format("woff2"),
+  url("./assets/fonts/Juz\ Name\ -\ WOFF.woff") format("woff"),
+  url("./assets/fonts/Juz\ Name\ -\ TTF.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* custom font for sura name and bismillah */
+@font-face {
   font-family: "read-alquran";
   src: url("/fonts/sura_names/fonts/read-alquran.eot");
   src: url("/fonts/sura_names/fonts/read-alquran.eot") format("embedded-opentype"),

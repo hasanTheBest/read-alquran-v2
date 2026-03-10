@@ -6,7 +6,7 @@ import theme from "./theme";
 import SettingProvider from "./Context/SettingsContext";
 import Footer from "./Components/Footer/Footer";
 import "./App.css"
-import "../public/fonts/aya/custom-font.css"
+// import "../public/fonts/aya/custom-font.css"
 
 const Home = lazy(() => import("./Containers/Home"));
 const Sura = lazy(() => import("./Containers/Sura"));
