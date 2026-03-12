@@ -1,28 +1,30 @@
 import React, { createContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import useSuspenseFetch from "../Hooks/useSuspenseFetch";
+import quranPages from "../assets/data/quranByPage.json"
+import { parseVerseKey } from "../Helper/pageBuilder";
+import verseKeyToPage from "../assets/data/suraAyaToPage.json"
 
 export const SuraContext = createContext();
 
 const SuraContextProvider = ({ children }) => {
-  let { suraId } = useParams();
-  const [ayaOfSura, setAyaOfSura] = useState(!Number(suraId) ? suraId.split(":")[1] : 1);
-  // let ayaId;
+  const { suraId: verseKey } = useParams(); // 2 or 2:20
+  const { surahId: suraId, ayahId } = parseVerseKey(verseKey);
+  const [ayaOfSura, setAyaOfSura] = useState(ayahId);
 
-  if (!Number(suraId)) {
-    suraId = suraId.split(":")[0];
-    // ayaId = suraId.split(":")[1];
-  }
+  const pageId = verseKeyToPage[`${suraId}:${ayahId}`];
 
   const sura = useSuspenseFetch("default", suraId);
 
   const value = {
-    // ayaId: Number(ayaId) ? Number(ayaId) : 1,
     ayaCount: sura.aya.length,
     suraId,
     sura,
     ayaOfSura,
     setAyaOfSura,
+    quranPages,
+    pageId,
+    verseKeyToPage
   };
 
   return <SuraContext.Provider value={value}>{children}</SuraContext.Provider>;

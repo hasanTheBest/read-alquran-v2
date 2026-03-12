@@ -1,85 +1,76 @@
 import React, { useContext, useRef, useEffect, useCallback } from "react";
-import { useVirtualizer } from "@tanstack/react-virtual";
+import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { SuraContext } from "../../Context/SuraContextProvider";
 import AyaArabic from "./AyaArabic";
 
-function groupAyatIntoPages(ayat, ayatPerPage = 15) {
-  const pages = [];
-  for (let i = 0; i < ayat.length; i += ayatPerPage) {
-    pages.push(ayat.slice(i, i + ayatPerPage));
-  }
-  return pages;
-}
+function PageVirtualLoader() {
 
-function pageVirtualLoader() {
+  const { quranPages, pageId } = useContext(SuraContext);
 
-  const { sura } = useContext(SuraContext);
-  const parentRef = useRef(null);
+  const pages = React.useMemo(() => quranPages.slice(1));
+  console.log(pages[pageId - 1])
 
-  const pages = groupAyatIntoPages(sura?.aya ?? [], 15);
-
-  const rowVirtualizer = useVirtualizer({
-    count: pages.length,
-    getScrollElement: () => parentRef.current,
+  const rowVirtualizer = useWindowVirtualizer({
+    count: pages.length, // index
     estimateSize: () => 600, // average page height
-    overscan: 2,
+    overscan: 3,
   });
+
+  // default page
+  useEffect(() => {
+
+    rowVirtualizer.scrollToIndex(pageId - 1, { align: "start" }); // index start with 0
+
+  }, [pageId]);
 
 
   return (
     <div
-      ref={parentRef}
       style={{
-        height: "calc(100vh - 200px)", // adjust if header exists
+        height: `${rowVirtualizer.getTotalSize()}px`,
         width: "100%",
-        overflow: "auto",
-        position: "relative"
+        position: "relative",
       }}
     >
-      <div
-        style={{
-          height: `${rowVirtualizer.getTotalSize()}px`,
-          width: "100%",
-          position: "relative",
-        }}
-      >
-        {
-          rowVirtualizer.getVirtualItems().map((virtualRow) => {
-            const page = pages[virtualRow.index];
+      {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+        const page = pages[virtualRow.index];
+        console.log("page", page)
 
-            return (
-              <div
-                key={virtualRow.key}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  transform: `translateY(${virtualRow.start}px)`,
-                  padding: "20px",
-                }}
-              >
-                <div
-                  style={{
-                    // display: "inline-flex",
-                    // flexWrap: "wrap",
-                    direction: "rtl",
-                    textAlign: "justify"
-                  }}
-                >
-                  {page.map(({tajweed, text, verse_key}) => (
-                    <React.Fragment key={verse_key}>
-                      <AyaArabic tajweedRule={tajweed} text={text} index={Number(verse_key.split(":")[1])} />
-                    </React.Fragment>
-                  ))}
-                </div>
-              </div>
-            );
-          })
-        }
-      </div>
+        return (
+          <div
+            key={virtualRow.key}
+            data-index={virtualRow.index}
+            ref={rowVirtualizer.measureElement}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              transform: `translateY(${virtualRow.start}px)`,
+              padding: "20px",
+            }}
+          >
+            <div
+              style={{
+                direction: "rtl",
+                textAlign: "justify",
+              }}
+            >
+              {page.map(({ tajweed, text, verse_key }) => (
+                <React.Fragment key={verse_key}>
+                  <AyaArabic
+                    tajweedRule={tajweed}
+                    text={text}
+                    index={Number(verse_key.split(":")[1])}
+                  />
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </div>
-  )
+  );
 }
 
-export default React.memo(pageVirtualLoader);
+export default React.memo(PageVirtualLoader);
