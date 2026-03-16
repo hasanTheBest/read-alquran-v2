@@ -66,7 +66,8 @@ const Aya = () => {
             maxWidth: "800px",
             margin: "0 auto"
           }}>
-            {readingMode ? (<MushafPage />) : (<PageVirtualLoader />)}
+            {/* {readingMode ? (<MushafPage />) : (<PageVirtualLoader />)} */}
+            {<PageVirtualLoader />}
             {/* {readingMode ? (<PageVirtualLoader />) : (<AyaVirtualLoader />)} */}
           </Container>
         {/* </WebfontLoader> */}

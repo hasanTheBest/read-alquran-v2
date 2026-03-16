@@ -2,10 +2,17 @@ import React, { useContext } from "react";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import AyaArabic from "./AyaArabic";
 import { MushafPageContext } from "../../Context/MushafPageContextProvider";
+import { SettingContext } from "../../Context/SettingsContext";
+import MushafPage from "./mushafPage";
+import PageMetaBarTop from "./PageMetaBarTop";
+import { parseVerseKey } from "../../Helper/pageBuilder";
+import ShowSuraName from "./ShowSuraName";
+import Bismillah from "../SuraInfo/Bismillah";
 
 function PageVirtualLoader() {
 
   const { quranPages } = useContext(MushafPageContext);
+  const { readingMode } = useContext(SettingContext);
 
   const pages = quranPages.slice(1)
 
@@ -26,7 +33,7 @@ function PageVirtualLoader() {
       {rowVirtualizer.getVirtualItems().map((virtualRow) => {
         const page = pages[virtualRow.index];
 
-        if(!page) return null;
+        if (!page) return null;
 
         return (
           <div
@@ -48,15 +55,19 @@ function PageVirtualLoader() {
                 textAlign: "justify",
               }}
             >
-              {page.map(({ tajweed, text, verse_key }) => (
-                <React.Fragment key={verse_key}>
-                  <AyaArabic
-                    tajweedRule={tajweed}
-                    text={text}
-                    index={Number(verse_key.split(":")[1])}
-                  />
-                </React.Fragment>
-              ))}
+              <PageMetaBarTop pageId={page[0]["page"]} juzzId={page[0]["juz"]} />
+
+              {page.map(({ tajweed, text, verse_key }) => {
+                const { surahId, ayahId } = parseVerseKey(verse_key)
+
+                return (
+                  <React.Fragment key={verse_key}>
+                    <ShowSuraName surahId={surahId} ayahId={ayahId} />
+                    <Bismillah ayahId={ayahId} surahId={surahId} />
+                    <AyaArabic tajweedRule={tajweed} text={text} index={ayahId} />
+                  </React.Fragment>
+                )
+              })}
             </div>
           </div>
         );
