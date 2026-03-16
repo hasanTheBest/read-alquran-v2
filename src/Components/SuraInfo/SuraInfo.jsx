@@ -1,108 +1,3 @@
-// import React, { useContext, useState } from "react";
-// import { makeStyles, FormControl, Select, MenuItem } from "@mui/material";
-
-// import suraMeta from "../SuraInfo/data/suraMeta.json";
-// import Bismillah from "./Bismillah";
-// import SelectSura from "./SelectSura";
-// import ExploreSuraMeta from "./ExploreSuraMeta";
-// import { SuraContext } from "../../Context/SuraContextProvider";
-
-// const useStyles = makeStyles((theme) => ({
-//   formControl: {
-//     marginRight: "2rem",
-//   },
-//   bannerSuraInfo: {
-//     width: "100%",
-//     height: 230,
-//     position: "relative",
-//     background: theme.palette.primary.light,
-//     marginTop: 64,
-//     display: "flex",
-//     alignItems: "center",
-//     flexDirection: "column",
-//     justifyContent: "flex-end",
-//   },
-//   goto: {
-//     marginTop: "1.5rem",
-//     textAlign: "center",
-//     "& .MuiFormControl-root": {
-//       verticalAlign: "bottom",
-//     },
-//   },
-//   link: {
-//     "&:hover": {
-//       textDecoration: "none",
-//     },
-//   },
-// }));
-
-// // Select Aya
-// const SelectAya = ({ aya }) => {
-//   const classes = useStyles();
-//   const { ayaOfSura, setAyaOfSura } = useContext(SuraContext);
-
-//   let optionsAya = [];
-
-//   for (let i = 1; i <= aya; i++) {
-//     optionsAya = [
-//       ...optionsAya,
-//       <MenuItem value={i} className={classes.link} key={String(i)}>
-//         {i}
-//       </MenuItem>,
-//     ];
-//   }
-
-//   const handleChangeAya = (e) => setAyaOfSura(e.target.value);
-
-//   // moves the menu below the select input
-//   const menuProps = {
-//     anchorOrigin: {
-//       vertical: "bottom",
-//       horizontal: "left",
-//     },
-//     transformOrigin: {
-//       vertical: "top",
-//       horizontal: "left",
-//     },
-//     getContentAnchorEl: null,
-//   };
-
-//   return (
-//     <FormControl>
-//       <Select
-//         MenuProps={menuProps}
-//         value={ayaOfSura}
-//         onChange={handleChangeAya}
-//       >
-//         <MenuItem value={0} className={classes.link}>
-//           AYA
-//         </MenuItem>
-//         {optionsAya}
-//       </Select>
-//     </FormControl>
-//   );
-// };
-
-// // Sura info
-// const SuraInfo = ({ suraId }) => {
-//   const classes = useStyles();
-
-//   return (
-//     <>
-//       <div className={classes.bannerSuraInfo}>
-//         <ExploreSuraMeta info={suraMeta.suras.sura} id={suraId} />
-
-//         <div className={classes.goto}>
-//           <SelectSura suraList={suraMeta.suras.sura} />
-//           <SelectAya aya={suraMeta.suras.sura[suraId - 1].ayas} />
-//         </div>
-//       </div>
-
-//       {Number(suraId) !== 1 && Number(suraId) !== 9 && <Bismillah />}
-//     </>
-//   );
-// };
-// export default SuraInfo;
 
 import React, { useContext, useMemo } from "react";
 import { Box, FormControl, Select, MenuItem } from "@mui/material";
@@ -112,6 +7,10 @@ import Bismillah from "./Bismillah";
 import SelectSura from "./SelectSura";
 import ExploreSuraMeta from "./ExploreSuraMeta";
 import { SuraContext } from "../../Context/SuraContextProvider";
+import suraAyaToPage from "../../assets/data/suraAyaToPage.json"
+import pageToSuraAya from "../../assets/data/pageToSuraAya.json"
+import { parseVerseKey } from "../../Helper/pageBuilder";
+import { useNavigate } from "react-router-dom";
 
 /* =========================
    Select Aya Component
@@ -156,6 +55,52 @@ const SelectAya = ({ aya }) => {
   );
 };
 
+const SelectPage = () => {
+  const navigate = useNavigate()
+  const { suraId, ayaOfSura, setAyaOfSura } = useContext(SuraContext)
+  let pageNumber = suraAyaToPage[`${suraId}:${ayaOfSura}`]
+
+
+  const handleChangePage = (e) => {
+    const page = Number(e.target.value)
+    const { surahId, ayahId } = parseVerseKey(pageToSuraAya[page][0])
+
+    setAyaOfSura(ayahId)
+
+    navigate(`/sura/${surahId}`);
+
+    pageNumber = suraAyaToPage[`${suraId}:${ayaOfSura}`]
+  }
+
+  const pageNumbers = Array.from({ length: 604 }, (_, i) => (
+    <MenuItem value={i + 1} key={i + 1}>
+      {i + 1}
+    </MenuItem>
+  ))
+
+  return (
+    <FormControl size="small">
+      <Select
+        value={pageNumber}
+        onChange={handleChangePage}
+        displayEmpty
+        MenuProps={{
+          anchorOrigin: {
+            vertical: "bottom",
+            horizontal: "left",
+          },
+          transformOrigin: {
+            vertical: "top",
+            horizontal: "left",
+          },
+        }}
+      >
+        {pageNumbers}
+      </Select>
+    </FormControl>
+  )
+}
+
 /* =========================
    Main SuraInfo Component
 ========================= */
@@ -194,10 +139,9 @@ const SuraInfo = ({ suraId }) => {
         >
           <SelectSura suraList={suraMeta.suras.sura} />
           <SelectAya aya={suraData.ayas} />
+          <SelectPage />
         </Box>
       </Box>
-
-      {Number(suraId) !== 1 && Number(suraId) !== 9 && <Bismillah />}
     </>
   );
 };

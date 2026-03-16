@@ -7,22 +7,14 @@ function PageVirtualLoader() {
 
   const { quranPages, pageId } = useContext(SuraContext);
 
-  const pages = React.useMemo(() => quranPages.slice(1));
-  console.log(pages[pageId - 1])
+  const pages = quranPages.slice(1)
+  // console.log(pages[pageId - 1])
 
   const rowVirtualizer = useWindowVirtualizer({
     count: pages.length, // index
-    estimateSize: () => 600, // average page height
-    overscan: 3,
+    estimateSize: () => 500, // average page height
+    overscan: 2,
   });
-
-  // default page
-  useEffect(() => {
-
-    rowVirtualizer.scrollToIndex(pageId - 1, { align: "start" }); // index start with 0
-
-  }, [pageId]);
-
 
   return (
     <div
@@ -34,7 +26,8 @@ function PageVirtualLoader() {
     >
       {rowVirtualizer.getVirtualItems().map((virtualRow) => {
         const page = pages[virtualRow.index];
-        console.log("page", page)
+
+        if(!page) return null;
 
         return (
           <div
