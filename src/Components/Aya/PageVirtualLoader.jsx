@@ -1,14 +1,13 @@
-import React, { useContext, useRef, useEffect, useCallback } from "react";
+import React, { useContext } from "react";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { SuraContext } from "../../Context/SuraContextProvider";
 import AyaArabic from "./AyaArabic";
+import { MushafPageContext } from "../../Context/MushafPageContextProvider";
 
 function PageVirtualLoader() {
 
-  const { quranPages, pageId } = useContext(SuraContext);
+  const { quranPages } = useContext(MushafPageContext);
 
   const pages = quranPages.slice(1)
-  // console.log(pages[pageId - 1])
 
   const rowVirtualizer = useWindowVirtualizer({
     count: pages.length, // index

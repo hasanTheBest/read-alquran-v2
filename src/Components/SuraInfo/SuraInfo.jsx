@@ -2,24 +2,26 @@
 import React, { useContext, useMemo } from "react";
 import { Box, FormControl, Select, MenuItem } from "@mui/material";
 
-import suraMeta from "../SuraInfo/data/suraMeta.json";
-import Bismillah from "./Bismillah";
 import SelectSura from "./SelectSura";
 import ExploreSuraMeta from "./ExploreSuraMeta";
-import { SuraContext } from "../../Context/SuraContextProvider";
-import suraAyaToPage from "../../assets/data/suraAyaToPage.json"
-import pageToSuraAya from "../../assets/data/pageToSuraAya.json"
 import { parseVerseKey } from "../../Helper/pageBuilder";
 import { useNavigate } from "react-router-dom";
+import { MushafPageContext } from "../../Context/MushafPageContextProvider";
 
 /* =========================
    Select Aya Component
 ========================= */
-const SelectAya = ({ aya }) => {
-  const { ayaOfSura, setAyaOfSura } = useContext(SuraContext);
+const SelectAya = ({ aya, suraId }) => {
+  const { ayaOfSura, setAyaOfSura, suraAyaToPage } = useContext(MushafPageContext);
+  const navigate = useNavigate()
 
   const handleChangeAya = (e) => {
-    setAyaOfSura(Number(e.target.value));
+    const newAya = Number(e.target.value)
+    setAyaOfSura(newAya);
+
+    navigate(`/page/${suraAyaToPage[`${suraId}:${newAya}`]}`)
+
+
   };
 
   const options = useMemo(
@@ -55,21 +57,17 @@ const SelectAya = ({ aya }) => {
   );
 };
 
-const SelectPage = () => {
+const SelectPage = ({pageId}) => {
   const navigate = useNavigate()
-  const { suraId, ayaOfSura, setAyaOfSura } = useContext(SuraContext)
-  let pageNumber = suraAyaToPage[`${suraId}:${ayaOfSura}`]
-
+  const { setAyaOfSura, pageToSuraAya } = useContext(MushafPageContext)
 
   const handleChangePage = (e) => {
     const page = Number(e.target.value)
-    const { surahId, ayahId } = parseVerseKey(pageToSuraAya[page][0])
+    const { ayahId } = parseVerseKey(pageToSuraAya[page][0])
 
     setAyaOfSura(ayahId)
 
-    navigate(`/sura/${surahId}`);
-
-    pageNumber = suraAyaToPage[`${suraId}:${ayaOfSura}`]
+    navigate(`/page/${page}`);
   }
 
   const pageNumbers = Array.from({ length: 604 }, (_, i) => (
@@ -81,7 +79,7 @@ const SelectPage = () => {
   return (
     <FormControl size="small">
       <Select
-        value={pageNumber}
+        value={pageId}
         onChange={handleChangePage}
         displayEmpty
         MenuProps={{
@@ -104,8 +102,10 @@ const SelectPage = () => {
 /* =========================
    Main SuraInfo Component
 ========================= */
-const SuraInfo = ({ suraId }) => {
-  const suraData = suraMeta.suras.sura[suraId - 1];
+const SuraInfo = ({ pageId }) => {
+  const {suraMeta, pageToSuraAya} = useContext(MushafPageContext)
+  const {surahId: suraId} = parseVerseKey(pageToSuraAya[pageId][0])
+  const suraData = suraMeta[suraId - 1];
 
   return (
     <>
@@ -124,7 +124,7 @@ const SuraInfo = ({ suraId }) => {
         })}
       >
         <ExploreSuraMeta
-          info={suraMeta.suras.sura}
+          info={suraMeta}
           id={suraId}
         />
 
@@ -137,9 +137,9 @@ const SuraInfo = ({ suraId }) => {
             alignItems: "center",
           }}
         >
-          <SelectSura suraList={suraMeta.suras.sura} />
-          <SelectAya aya={suraData.ayas} />
-          <SelectPage />
+          <SelectSura suraList={suraMeta} suraId={suraId} />
+          <SelectAya aya={suraData.ayas} suraId={suraId} />
+          <SelectPage pageId={pageId}/>
         </Box>
       </Box>
     </>

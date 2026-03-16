@@ -15,15 +15,10 @@ import {
 
 import { styled } from "@mui/material/styles";
 
-import AyaVirtualLoader from "./AyaVirtualLoader";
 import Drawer from "../Header/Drawer/Drawer";
 
 import PageVirtualLoader from "./pageVirtualLoader";
 import MushafPage from "./mushafPage";
-
-const MaxWidthWrapper = styled(Container)({
-  maxWidth: 790,
-});
 
 const SuraWrapper = styled("div")({
   display: "flex",
@@ -46,7 +41,7 @@ const Aya = () => {
 
   return (
     <>
-      {breakUp1440 && pathname.startsWith("/sura") && (
+      {breakUp1440 && pathname.startsWith("/page") && (
         <Box
           sx={{
             position: "absolute",

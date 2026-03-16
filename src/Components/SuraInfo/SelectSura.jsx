@@ -7,10 +7,11 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import { SuraContext } from "../../Context/SuraContextProvider";
+import { MushafPageContext } from "../../Context/MushafPageContextProvider";
+import { parseVerseKey } from "../../Helper/pageBuilder";
 
-const SelectSura = ({ suraList }) => {
-  const { suraId, setAyaOfSura } = useContext(SuraContext);
+const SelectSura = ({ suraList, suraId }) => {
+  const { setAyaOfSura, suraAyaToPage } = useContext(MushafPageContext);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -19,8 +20,10 @@ const SelectSura = ({ suraList }) => {
     // reset ayah
     setAyaOfSura(1);
 
+    const newPage = suraAyaToPage[`${newSura}:1`]
+
     // change route
-    navigate(`/sura/${newSura}`);
+    navigate(`/page/${newPage}`);
   };
 
   const items = useMemo(
