@@ -9,11 +9,14 @@ import { parseVerseKey } from "../../Helper/pageBuilder";
 import ShowSuraName from "./ShowSuraName";
 import Bismillah from "../SuraInfo/Bismillah";
 import { useNavigate, useParams } from "react-router-dom";
+import Words from "../Words/Words";
+import AyaWrapper from "./AyaWrapper";
+import { Box } from "@mui/material";
 
 function PageVirtualLoader() {
 
   const { quranPages } = useContext(MushafPageContext);
-  const { readingMode } = useContext(SettingContext);
+  const { readingMode, showWbw } = useContext(SettingContext);
   const { pageId: urlPage } = useParams()
   const navigate = useNavigate()
   const lastPageRef = useRef(null)
@@ -26,17 +29,17 @@ function PageVirtualLoader() {
     count: pages.length, // index
     estimateSize: () => 500, // average page height
     overscan: 2,
-    initialScrollOffset: (pageFromUrl - 1) * 500, // jump to pageFromUrl
+    // initialScrollOffset: (pageFromUrl - 1) * 500, // jump to pageFromUrl
     onChange: (instance) => {
       const virtualItems = instance.getVirtualItems()
 
       if (!virtualItems.length) return
 
       // find item closest to top of viewport
-  const firstVisible = virtualItems.find(item => item.start >= instance.scrollOffset)
-    || virtualItems[0];
+      const firstVisible = virtualItems.find(item => item.start >= instance.scrollOffset)
+        || virtualItems[0];
 
-  const currentPage = firstVisible.index + 1;
+      const currentPage = firstVisible.index + 1;
 
       if (lastPageRef.current !== currentPage) {
         lastPageRef.current = currentPage
@@ -86,7 +89,46 @@ function PageVirtualLoader() {
               padding: "20px",
             }}
           >
-            <div
+            {!readingMode && (<>
+
+              <PageMetaBarTop pageId={page[0]["page"]} juzzId={page[0]["juz"]} />
+              
+              <Box>
+                {
+                  page.map(({ tajweed, text, words, translation, page, verse_key }) => {
+                    const { surahId, ayahId } = parseVerseKey(verse_key)
+
+                    return (
+                      <>
+                      <ShowSuraName surahId={surahId} ayahId={ayahId} />
+                    <Bismillah ayahId={ayahId} surahId={surahId} />
+                        {
+                          showWbw && (
+                            <Words
+                              ayaNum={ayahId}
+                              words={words}
+                            // mushafFont={mushafFont}
+                            />
+                          )
+                        }
+
+                        <AyaWrapper
+                          text={text}
+                          tajweed={tajweed}
+                          ayaNum={ayahId}
+                          words={words}
+                          page={page}
+                          translation={translation}
+                        />
+                      </>
+                    )
+                  })
+                }
+              </Box>
+
+            </>)}
+
+            {readingMode && (<div
               style={{
                 direction: "rtl",
                 textAlign: "justify",
@@ -105,7 +147,8 @@ function PageVirtualLoader() {
                   </React.Fragment>
                 )
               })}
-            </div>
+            </div>)}
+
           </div>
         );
       })}
