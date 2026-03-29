@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import AyaArabic from "./AyaArabic";
 import { MushafPageContext } from "../../Context/MushafPageContextProvider";
@@ -8,19 +8,56 @@ import PageMetaBarTop from "./PageMetaBarTop";
 import { parseVerseKey } from "../../Helper/pageBuilder";
 import ShowSuraName from "./ShowSuraName";
 import Bismillah from "../SuraInfo/Bismillah";
+import { useNavigate, useParams } from "react-router-dom";
 
 function PageVirtualLoader() {
 
   const { quranPages } = useContext(MushafPageContext);
   const { readingMode } = useContext(SettingContext);
+  const { pageId: urlPage } = useParams()
+  const navigate = useNavigate()
+  const lastPageRef = useRef(null)
 
   const pages = quranPages.slice(1)
+
+  const pageFromUrl = Number(urlPage) || 1;
 
   const rowVirtualizer = useWindowVirtualizer({
     count: pages.length, // index
     estimateSize: () => 500, // average page height
     overscan: 2,
+    initialScrollOffset: (pageFromUrl - 1) * 500, // jump to pageFromUrl
+    onChange: (instance) => {
+      const virtualItems = instance.getVirtualItems()
+
+      if (!virtualItems.length) return
+
+      // find item closest to top of viewport
+  const firstVisible = virtualItems.find(item => item.start >= instance.scrollOffset)
+    || virtualItems[0];
+
+  const currentPage = firstVisible.index + 1;
+
+      if (lastPageRef.current !== currentPage) {
+        lastPageRef.current = currentPage
+
+        navigate(`/page/${currentPage}`, { replace: true })
+      }
+    }
   });
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (pageFromUrl > 0) {
+        rowVirtualizer.scrollToIndex(pageFromUrl - 1, {
+          align: "start"
+        })
+      }
+    }, 0)
+
+    return () => clearTimeout(timeout)
+
+  }, [pageFromUrl])
 
   return (
     <div

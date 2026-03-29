@@ -11,11 +11,10 @@ const Aya = lazy(() => import("../Components/Aya/Aya"));
 const Sura = () => {
   const { pageId } = useParams();
 
-
   return (
     <MushafPageContextProvider>
       <Header />
-      <SuraInfo pageId={pageId} />
+      <SuraInfo pageId={Number(pageId)} />
       <Aya />
     </MushafPageContextProvider>
   );
