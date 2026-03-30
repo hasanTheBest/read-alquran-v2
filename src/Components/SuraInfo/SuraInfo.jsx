@@ -9,97 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { MushafPageContext } from "../../Context/MushafPageContextProvider";
 
 /* =========================
-   Select Aya Component
-========================= */
-const SelectAya = ({ aya, suraId }) => {
-  const { ayaOfSura, setAyaOfSura, suraAyaToPage } = useContext(MushafPageContext);
-  const navigate = useNavigate()
-
-  const handleChangeAya = (e) => {
-    const newAya = Number(e.target.value)
-    setAyaOfSura(newAya);
-
-    navigate(`/page/${suraAyaToPage[`${suraId}:${newAya}`]}`)
-
-
-  };
-
-  const options = useMemo(
-    () =>
-      Array.from({ length: aya }, (_, i) => (
-        <MenuItem value={i + 1} key={i + 1}>
-          {i + 1}
-        </MenuItem>
-      )),
-    [aya]
-  );
-
-  return (
-    <FormControl size="small">
-      <Select
-        value={ayaOfSura}
-        onChange={handleChangeAya}
-        displayEmpty
-        MenuProps={{
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "left",
-          },
-          transformOrigin: {
-            vertical: "top",
-            horizontal: "left",
-          },
-        }}
-      >
-        {options}
-      </Select>
-    </FormControl>
-  );
-};
-
-const SelectPage = ({pageId}) => {
-  const navigate = useNavigate()
-  const { setAyaOfSura, pageToSuraAya } = useContext(MushafPageContext)
-
-  const handleChangePage = (e) => {
-    const page = Number(e.target.value)
-    const { ayahId } = parseVerseKey(pageToSuraAya[page][0])
-
-    setAyaOfSura(ayahId)
-
-    navigate(`/page/${page}`);
-  }
-
-  const pageNumbers = Array.from({ length: 604 }, (_, i) => (
-    <MenuItem value={i + 1} key={i + 1}>
-      {i + 1}
-    </MenuItem>
-  ))
-
-  return (
-    <FormControl size="small">
-      <Select
-        value={pageId}
-        onChange={handleChangePage}
-        displayEmpty
-        MenuProps={{
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "left",
-          },
-          transformOrigin: {
-            vertical: "top",
-            horizontal: "left",
-          },
-        }}
-      >
-        {pageNumbers}
-      </Select>
-    </FormControl>
-  )
-}
-
-/* =========================
    Main SuraInfo Component
 ========================= */
 const SuraInfo = ({ pageId }) => {
@@ -128,7 +37,8 @@ const SuraInfo = ({ pageId }) => {
           id={suraId}
         />
 
-        <Box
+{/* Transferred to the header compnent */}
+        {/* <Box
           sx={{
             mt: 2,
             textAlign: "center",
@@ -140,7 +50,7 @@ const SuraInfo = ({ pageId }) => {
           <SelectSura suraList={suraMeta} suraId={suraId} />
           <SelectAya aya={suraData.ayas} suraId={suraId} />
           <SelectPage pageId={pageId}/>
-        </Box>
+        </Box> */}
       </Box>
     </>
   );

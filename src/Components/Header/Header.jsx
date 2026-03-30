@@ -25,6 +25,7 @@ import Search from "./Search";
 import Settings from "./Settings";
 
 import { SettingContext } from "../../Context/SettingsContext";
+import SuraAyaPageNavigation from "./SuraAyaPageNavigation";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -46,10 +47,11 @@ const Header = () => {
         <Box
           sx={{
             width: "100%",
-            maxWidth: 1600,
+            maxWidth: 1200,
             mx: "auto",
             display: "flex",
             alignItems: "center",
+            justifyContent: "space-between"
           }}
         >
           <Toolbar>
@@ -79,7 +81,9 @@ const Header = () => {
           </Toolbar>
 
           {/* Search */}
-          <Search />
+          {/* <Search /> */}
+          {/* Sura Aya page navigation */}
+          {pathname.startsWith("/page") && <SuraAyaPageNavigation />}
 
           <Toolbar>
             <Tooltip title="Toggle Reading Mode">
@@ -92,7 +96,7 @@ const Header = () => {
               </IconButton>
             </Tooltip>
 
-            {pathname.startsWith("/sura") && !breakUp1440 && <Settings />}
+            {pathname.startsWith("/page") && !breakUp1440 && <Settings />}
           </Toolbar>
         </Box>
       </AppBar>
@@ -102,7 +106,7 @@ const Header = () => {
         toggleNavigationDrawer={toggleNavigationDrawer}
       />
 
-      {pathname.startsWith("/sura") && !breakUp1440 && <Drawer />}
+      {pathname.startsWith("/page") && !breakUp1440 && <Drawer />}
     </>
   );
 };

@@ -9,14 +9,14 @@ import MushafPageContextProvider from "../Context/MushafPageContextProvider";
 const Aya = lazy(() => import("../Components/Aya/Aya"));
 
 const Sura = () => {
-  const { pageId } = useParams();
+  // const { pageId } = useParams();
 
   return (
-    <MushafPageContextProvider>
+    <>
       <Header />
-      <SuraInfo pageId={Number(pageId)} />
+      {/* <SuraInfo pageId={Number(pageId)} /> */}
       <Aya />
-    </MushafPageContextProvider>
+    </>
   );
 };
 
