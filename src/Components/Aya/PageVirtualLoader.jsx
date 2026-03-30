@@ -20,6 +20,7 @@ function PageVirtualLoader() {
   const { pageId: urlPage } = useParams()
   const navigate = useNavigate()
   const lastPageRef = useRef(null)
+  const listRef = useRef(null)
 
   const pages = quranPages.slice(1)
 
@@ -27,26 +28,27 @@ function PageVirtualLoader() {
 
   const rowVirtualizer = useWindowVirtualizer({
     count: pages.length, // index
-    estimateSize: () => 500, // average page height
-    overscan: 2,
+    estimateSize: () => 700, // average page height
+    overscan: 5,
+    measureElement: (el) => el.getBoundingClientRect().height,
     // initialScrollOffset: (pageFromUrl - 1) * 500, // jump to pageFromUrl
-    onChange: (instance) => {
-      const virtualItems = instance.getVirtualItems()
+    // onChange: (instance) => {
+    //   const virtualItems = instance.getVirtualItems()
 
-      if (!virtualItems.length) return
+    //   if (!virtualItems.length) return
 
-      // find item closest to top of viewport
-      const firstVisible = virtualItems.find(item => item.start >= instance.scrollOffset)
-        || virtualItems[0];
+    //   // find item closest to top of viewport
+    //   const firstVisible = virtualItems.find(item => item.start >= instance.scrollOffset)
+    //     || virtualItems[0];
 
-      const currentPage = firstVisible.index + 1;
+    //   const currentPage = firstVisible.index + 1;
 
-      if (lastPageRef.current !== currentPage) {
-        lastPageRef.current = currentPage
+    //   if (lastPageRef.current !== currentPage) {
+    //     lastPageRef.current = currentPage
 
-        navigate(`/page/${currentPage}`, { replace: true })
-      }
-    }
+    //     navigate(`/page/${currentPage}`, { replace: true })
+    //   }
+    // }
   });
 
   useEffect(() => {
@@ -63,95 +65,97 @@ function PageVirtualLoader() {
   }, [pageFromUrl])
 
   return (
-    <div
-      style={{
-        height: `${rowVirtualizer.getTotalSize()}px`,
-        width: "100%",
-        position: "relative",
-      }}
-    >
-      {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-        const page = pages[virtualRow.index];
+    <div ref={listRef} style={{ width: '100%', position: 'relative' }} >
+      <div
+        style={{
+          height: `${rowVirtualizer.getTotalSize()}px`,
+          width: "100%",
+          position: "relative",
+        }}
+      >
+        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+          const page = pages[virtualRow.index];
 
-        if (!page) return null;
+          if (!page) return null;
 
-        return (
-          <div
-            key={virtualRow.key}
-            data-index={virtualRow.index}
-            ref={rowVirtualizer.measureElement}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              transform: `translateY(${virtualRow.start}px)`,
-              padding: "20px",
-            }}
-          >
-            {!readingMode && (<>
-
-              <PageMetaBarTop pageId={page[0]["page"]} juzzId={page[0]["juz"]} />
-              
-              <Box>
-                {
-                  page.map(({ tajweed, text, words, translation, page, verse_key }) => {
-                    const { surahId, ayahId } = parseVerseKey(verse_key)
-
-                    return (
-                      <>
-                      <ShowSuraName surahId={surahId} ayahId={ayahId} />
-                    <Bismillah ayahId={ayahId} surahId={surahId} />
-                        {
-                          showWbw && (
-                            <Words
-                              ayaNum={ayahId}
-                              words={words}
-                            // mushafFont={mushafFont}
-                            />
-                          )
-                        }
-
-                        <AyaWrapper
-                          text={text}
-                          tajweed={tajweed}
-                          ayaNum={ayahId}
-                          words={words}
-                          page={page}
-                          translation={translation}
-                        />
-                      </>
-                    )
-                  })
-                }
-              </Box>
-
-            </>)}
-
-            {readingMode && (<div
+          return (
+            <div
+              key={virtualRow.key}
+              data-index={virtualRow.index}
+              ref={(el) => rowVirtualizer.measureElement(el)}
               style={{
-                direction: "rtl",
-                textAlign: "justify",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                transform: `translateY(${virtualRow.start}px)`,
+                padding: "20px",
               }}
             >
-              <PageMetaBarTop pageId={page[0]["page"]} juzzId={page[0]["juz"]} />
+              {!readingMode && (<>
 
-              {page.map(({ tajweed, text, verse_key }) => {
-                const { surahId, ayahId } = parseVerseKey(verse_key)
+                <PageMetaBarTop pageId={page[0]["page"]} juzzId={page[0]["juz"]} />
 
-                return (
-                  <React.Fragment key={verse_key}>
-                    <ShowSuraName surahId={surahId} ayahId={ayahId} />
-                    <Bismillah ayahId={ayahId} surahId={surahId} />
-                    <AyaArabic tajweedRule={tajweed} text={text} index={ayahId} />
-                  </React.Fragment>
-                )
-              })}
-            </div>)}
+                <Box>
+                  {
+                    page.map(({ tajweed, text, words, translation, page, verse_key }) => {
+                      const { surahId, ayahId } = parseVerseKey(verse_key)
 
-          </div>
-        );
-      })}
+                      return (
+                        <>
+                          <ShowSuraName surahId={surahId} ayahId={ayahId} />
+                          <Bismillah ayahId={ayahId} surahId={surahId} />
+                          {
+                            showWbw && (
+                              <Words
+                                ayaNum={ayahId}
+                                words={words}
+                              // mushafFont={mushafFont}
+                              />
+                            )
+                          }
+
+                          <AyaWrapper
+                            text={text}
+                            tajweed={tajweed}
+                            ayaNum={ayahId}
+                            words={words}
+                            page={page}
+                            translation={translation}
+                          />
+                        </>
+                      )
+                    })
+                  }
+                </Box>
+
+              </>)}
+
+              {readingMode && (<div
+                style={{
+                  direction: "rtl",
+                  textAlign: "justify",
+                }}
+              >
+                <PageMetaBarTop pageId={page[0]["page"]} juzzId={page[0]["juz"]} />
+
+                {page.map(({ tajweed, text, verse_key }) => {
+                  const { surahId, ayahId } = parseVerseKey(verse_key)
+
+                  return (
+                    <React.Fragment key={verse_key}>
+                      <ShowSuraName surahId={surahId} ayahId={ayahId} />
+                      <Bismillah ayahId={ayahId} surahId={surahId} />
+                      <AyaArabic tajweedRule={tajweed} text={text} index={ayahId} />
+                    </React.Fragment>
+                  )
+                })}
+              </div>)}
+
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
